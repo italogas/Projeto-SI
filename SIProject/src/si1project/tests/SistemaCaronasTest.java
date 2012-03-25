@@ -3,9 +3,7 @@ package si1project.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import easyaccept.EasyAcceptFacade;
-import easyaccept.script.test.TestFacade;
 
 public class SistemaCaronasTest {
 	public static void main(String[] args) {
