@@ -1,8 +1,13 @@
-package si1project.logic;
+package si1project.tests;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
-public class SistemaCaronas {
+import si1project.logic.Carona;
+import si1project.logic.Sessao;
+import si1project.logic.Usuario;
+
+public class SistemaCaronasTestFacade {
 	Collection<Usuario> listaUsuarios;
 	Collection<Carona> listaCaronas;
 	Sessao sessaoAtual;
