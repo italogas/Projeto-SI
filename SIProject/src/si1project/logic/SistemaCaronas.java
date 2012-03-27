@@ -3,13 +3,14 @@ package si1project.logic;
 import java.util.*;
 
 public class SistemaCaronas {
-	Collection<Usuario> listaUsuarios;
-	Collection<Carona> listaCaronas;
+	MapaLoginUsuario listaUsuarios;
+	MapaIdCarona listaCaronas;
 	Sessao sessaoAtual;
+	
 
 	public void criarUsuario(String login, String senha, String nome,
-			String endereco, String email) {
-		// TODO
+			String endereco, String email) throws Exception {
+			listaUsuarios.criar(login, senha, nome, endereco, email);
 	}
 
 	public void criarUsuario(String login, String nome, String endereco) {
@@ -36,13 +37,13 @@ public class SistemaCaronas {
 	}
 
 	public Object getAtributoCarona(int idCarona, String nomeAtributo) throws Exception {
-		// TODO
-		return null;
+		
+		return   ((Carona) listaCaronas.get(idCarona)).getAtributo(nomeAtributo);
 	}
 
 	public Object getAtributoUsuario(String login, String atributo) throws Exception  {
-		// TODO
-		return null;
+		
+		return   ((Usuario) listaUsuarios.get(login)).getAtributo(atributo);
 	}
 
 	public String getTrajeto(int idCarona) {

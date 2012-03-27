@@ -168,5 +168,11 @@ public class Carona {
 				+ data + ", vagas=" + vagas + ", hora=" + hora + "]";
 	}
 
+	public Object getAtributo(String nomeAtributo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 }

@@ -3,21 +3,19 @@ package si1project.logic;
 import java.lang.reflect.Method;
 
 public class Usuario {
-	private Integer idUsuario;
 	private String login;
 	private String email;
 	private String senha;
 	private String nome;
 	private String endereco;
 
-	public void criarUsuario(String login, String senha, String nome, String endereco, String email) 
-			throws Exception {
+	public Usuario(String login, String senha, String nome, String endereco, String email) throws Exception{
 		setLogin(login);
 		setSenha(senha);
 		setNome(nome);
 		setEndereco(endereco);
 		setEmail(email);
-		//TODO
+
 	}
 	
 	public String getLogin() {
@@ -76,14 +74,12 @@ public class Usuario {
 		return null;
 	}
 
-	public String getAtributoUsuario(String login2, String nomeAtributo) throws Exception {
-		if(login2==null || login2.equals(""))
-			throw new Exception("Login inválido");
+	public Object getAtributo( String nomeAtributo) throws Exception {
 		if(nomeAtributo==null)
 			throw new Exception("Atributo inválido");
 		
 		Method m1 = Usuario.class.getMethod("get" + nomeAtributo, String.class);
-		return (String)m1.invoke(/*objetoUsuario*/login2, /*listaArgumentos*/this);
+		return (String)m1.invoke(/*objetoUsuario*/this, /*listaArgumentos*/this);
 	}
 
 	@Override
@@ -93,7 +89,6 @@ public class Usuario {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result
 				+ ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + idUsuario;
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
@@ -118,8 +113,6 @@ public class Usuario {
 			if (other.endereco != null)
 				return false;
 		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (idUsuario != other.idUsuario)
 			return false;
 		if (login == null) {
 			if (other.login != null)
