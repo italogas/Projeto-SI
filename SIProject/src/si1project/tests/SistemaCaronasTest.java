@@ -3,6 +3,7 @@ package si1project.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import si1project.logic.SistemaCaronas;
 import easyaccept.EasyAcceptFacade;
 
 public class SistemaCaronasTest {
@@ -17,7 +18,7 @@ public class SistemaCaronasTest {
          files.add("scripts/US05.txt");
          
          //Instantiate your software facade
-	     SistemaCaronasTestFacade sis1 = new SistemaCaronasTestFacade();
+	     SistemaCaronas sis1 = new SistemaCaronas();
 	     
 	     //Instantiate EasyAccept facade
 	     EasyAcceptFacade eaFacade = new EasyAcceptFacade(sis1, files);
