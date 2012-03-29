@@ -1,6 +1,5 @@
 package si1project.logic;
 
-import java.util.UUID;
 
 public class Sessao {
 	private Usuario user;

@@ -1,16 +1,15 @@
 package si1project.logic;
 
-import java.util.*;
+import java.util.Collection;
 
 public class SistemaCaronas {
-	MapaLoginUsuario listaUsuarios;
-	MapaIdCarona listaCaronas;
-	Sessao sessaoAtual;
-	
+	MapaLoginUsuario mapaLoginUsuarios;
+	MapaIdCarona mapaIdCaronas;
 
 	public void criarUsuario(String login, String senha, String nome,
 			String endereco, String email) throws Exception {
-			listaUsuarios.criar(login, senha, nome, endereco, email);
+		Usuario u = new Usuario(login, senha, nome, endereco, email);	
+		mapaLoginUsuarios.addUsuario(u);
 	}
 
 	public void criarUsuario(String login, String nome, String endereco) {
@@ -38,12 +37,12 @@ public class SistemaCaronas {
 
 	public Object getAtributoCarona(int idCarona, String nomeAtributo) throws Exception {
 		
-		return   ((Carona) listaCaronas.get(idCarona)).getAtributo(nomeAtributo);
+		return   ((Carona) mapaIdCaronas.get(idCarona)).getAtributo(nomeAtributo);
 	}
 
 	public Object getAtributoUsuario(String login, String atributo) throws Exception  {
 		
-		return   ((Usuario) listaUsuarios.get(login)).getAtributo(atributo);
+		return   ((Usuario) mapaLoginUsuarios.get(login)).getAtributo(atributo);
 	}
 
 	public String getTrajeto(int idCarona) {

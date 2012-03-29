@@ -10,10 +10,8 @@ public class MapaLoginUsuario {
 		return mapaUsu.get(login);
 	}
 
-	public void criar(String login, String senha, String nome, String endereco,
-			String email) throws Exception {
-		Usuario user = new Usuario(login, senha, nome, endereco, email);
-		mapaUsu.put(login, user);
-		
+	public void addUsuario(Usuario u) throws Exception {
+		//TODO testar
+		mapaUsu.put(u.getLogin(), u);
 	}
 }
