@@ -23,7 +23,7 @@ public class Usuario {
 	}
 
 	public void setLogin(String login) {
-		//TODO
+		//TODO falta verificar se a string login é valida
 		this.login = login;
 	}
 
@@ -32,7 +32,7 @@ public class Usuario {
 	}
 
 	public void setEmail(String email) {
-		//TODO
+		//TODO falta verificar se o email é valido
 		this.email = email;
 	}
 
@@ -41,7 +41,7 @@ public class Usuario {
 	}
 
 	public void setSenha(String senha) {
-		//TODO
+		//TODO Decidir e verificar o que é uma senha valida
 		this.senha = senha;
 	}
 
@@ -50,7 +50,7 @@ public class Usuario {
 	}
 
 	public void setNome(String nome) {
-		//TODO
+		//TODO 
 		this.nome = nome;
 	}
 
@@ -59,19 +59,8 @@ public class Usuario {
 	}
 
 	public void setEndereco(String endereco) {
-		//TODO
+		//TODO "verificar se o endereço é valido"
 		this.endereco = endereco;
-	}
-
-	public String abrirSessao(String login2, String senha2) {
-		//TODO
-		return null;
-		
-	}
-	
-	public String fecharSessao(String login2) {
-		//TODO
-		return null;
 	}
 
 	public Object getAtributo( String nomeAtributo) throws Exception {
@@ -80,7 +69,13 @@ public class Usuario {
 		
 		Method m1 = Usuario.class.getMethod("get" + nomeAtributo, String.class);
 		return (String)m1.invoke(/*objetoUsuario*/this, /*listaArgumentos*/this);
+		
 	}
+	
+	public boolean validaSessao(String login2, String senha2) {
+		 return (login2.equals(login) & senha2.equals(senha));
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -132,5 +127,6 @@ public class Usuario {
 		return true;
 	}
 
+	
 	
 }
