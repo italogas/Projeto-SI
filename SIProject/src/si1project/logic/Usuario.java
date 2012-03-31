@@ -1,7 +1,5 @@
 package si1project.logic;
 
-import java.lang.reflect.Method;
-
 public class Usuario {
 	private String login;
 	private String email;
@@ -15,15 +13,15 @@ public class Usuario {
 		setNome(nome);
 		setEndereco(endereco);
 		setEmail(email);
-
 	}
 	
 	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(String login) {
-		//TODO falta verificar se a string login é valida
+	public void setLogin(String login) throws Exception {
+		if(login == null || login.equals(""))
+			throw new Exception("Login inválido");
 		this.login = login;
 	}
 
@@ -31,8 +29,9 @@ public class Usuario {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		//TODO falta verificar se o email é valido
+	public void setEmail(String email) throws Exception {
+		if(email == null || email.equals(""))
+			throw new Exception("Email inválido");
 		this.email = email;
 	}
 
@@ -40,8 +39,9 @@ public class Usuario {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
-		//TODO Decidir e verificar o que é uma senha valida
+	public void setSenha(String senha) throws Exception {
+		if(senha == null || senha.equals(""))
+			throw new Exception("Senha inválida");
 		this.senha = senha;
 	}
 
@@ -49,8 +49,9 @@ public class Usuario {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		//TODO 
+	public void setNome(String nome) throws Exception {
+		if(nome == null || nome.equals(""))
+			throw new Exception("Nome inválido");
 		this.nome = nome;
 	}
 
@@ -58,19 +59,31 @@ public class Usuario {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
-		//TODO verificar se o endereço é valido
+	public void setEndereco(String endereco) throws Exception {
+		if(endereco == null || endereco.equals(""))
+			throw new Exception("Endereço inválido");
 		this.endereco = endereco;
 	}
 
-	public Object getAtributo( String nomeAtributo) throws Exception {
-		// TODO: eh melhor usar a estrategia indicada por Athur monitor: fazer com if-else?
-		if(nomeAtributo==null)
+	/*
+	 * Retorna null se o atributo nao existir.
+	 */
+	public Object getAtributo(String nomeAtributo) throws Exception {
+		if(nomeAtributo == null || nomeAtributo.equals(""))
 			throw new Exception("Atributo inválido");
 		
-		Method m1 = Usuario.class.getMethod("get" + nomeAtributo, String.class);
-		return (String)m1.invoke(/*objetoUsuario*/this, /*listaArgumentos*/this);
-		
+		if(nomeAtributo.equals("nome"))
+			return this.getNome();
+		else if (nomeAtributo.equals("login"))
+			return this.getLogin();
+		else if(nomeAtributo.equals("email"))
+			return this.getEmail();
+		else if(nomeAtributo.equals("senha"))
+			return this.getSenha();
+		else if(nomeAtributo.equals("endereco"))
+			return this.getEndereco();
+		else
+			throw new Exception("Atributo inexistente");
 	}
 	
 	@Override
