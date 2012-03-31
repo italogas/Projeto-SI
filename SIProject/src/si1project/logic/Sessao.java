@@ -7,17 +7,30 @@ public class Sessao {
 	
 	public Sessao(Usuario user) {
 		setUser(user);
+		setId(this.hashCode());
 	}
+	
+	public Usuario getUser() {
+		return user;
+	}
+	
+	private void setId(int hashCode) {
+		this.id = hashCode;
+	}
+
+	/* isso estah estranho, nao eh o usuario, mas sim o
+	 * sistema que deve validar as coisas, principalmente
+	 * uma sessao 
+	 */
 	public int abrirSessao(String login, String senha){
-		user.validaSessao(login,senha);
-		return id;
+		//user.validaSessao(login, senha);
+		return this.id;
 		
 	}
 	private void setUser(Usuario user2) {
+		//TODO: testes
 		this.user = user2;
-		
 	}
-
 
 	@Override
 	public int hashCode() {

@@ -59,11 +59,12 @@ public class Usuario {
 	}
 
 	public void setEndereco(String endereco) {
-		//TODO "verificar se o endereço é valido"
+		//TODO verificar se o endereço é valido
 		this.endereco = endereco;
 	}
 
 	public Object getAtributo( String nomeAtributo) throws Exception {
+		// TODO: eh melhor usar a estrategia indicada por Athur monitor: fazer com if-else?
 		if(nomeAtributo==null)
 			throw new Exception("Atributo inválido");
 		
@@ -72,11 +73,6 @@ public class Usuario {
 		
 	}
 	
-	public boolean validaSessao(String login2, String senha2) {
-		 return (login2.equals(login) & senha2.equals(senha));
-	}
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

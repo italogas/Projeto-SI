@@ -1,10 +1,12 @@
 package si1project.logic;
 
-import java.util.Collection;
+import java.util.List;
 
 public class SistemaCaronas {
 	MapaLoginUsuario mapaLoginUsuarios;
 	MapaIdCarona mapaIdCaronas;
+	GerenciadorDeMensagens gerenciadorDeMensagens;
+	GerenciadorDeSessoes gerenciadorDeSessoes;
 
 	public void criarUsuario(String login, String senha, String nome,
 			String endereco, String email) throws Exception {
@@ -29,19 +31,17 @@ public class SistemaCaronas {
 	/*
 	 * Retorna uma lista de id's de caronas
 	 */
-	public Collection<Integer> localizarCarona(int idSessao, String origem,
+	public List<Integer> localizarCarona(int idSessao, String origem,
 			String destino)  throws Exception {
 		// TODO
 		return null;
 	}
 
 	public Object getAtributoCarona(int idCarona, String nomeAtributo) throws Exception {
-		
 		return   ((Carona) mapaIdCaronas.get(idCarona)).getAtributo(nomeAtributo);
 	}
 
 	public Object getAtributoUsuario(String login, String atributo) throws Exception  {
-		
 		return   ((Usuario) mapaLoginUsuarios.get(login)).getAtributo(atributo);
 	}
 
@@ -59,6 +59,9 @@ public class SistemaCaronas {
 	 * Retorna o id da sessao aberta
 	 */
 	public int abrirSessao(String login2, String senha2) {
+		// se nao existe sessao aberta com esse usuario: entao 
+		// cria sessao e valida-a no construtor de sessao
+		// caso contrario busca sessao no mapa e 
 		// TODO
 		return -1;
 	}
@@ -66,13 +69,18 @@ public class SistemaCaronas {
 	public void encerrarSessao(String login) {
 		// TODO
 	}
-
+	
+	/*
+	 * torna null todos os
+	 * objetos que estao sendo manipulados atualmente
+	 * pelo sistema
+	 */
 	public void zerarSistema() {
 		// TODO
 	}
-
+	
 	public void encerrarSistema() {
-		// System.exit(0);
+		// System.exit(0)?;
 	}
 	
 	/*
@@ -124,5 +132,21 @@ public class SistemaCaronas {
 
 	public void aceitarSolicitacao(int idSessao, int idSolicitacao) {
 		// TODO
+	}
+
+	public MapaLoginUsuario getMapaLoginUsuarios() {
+		return mapaLoginUsuarios;
+	}
+
+	public MapaIdCarona getMapaIdCaronas() {
+		return mapaIdCaronas;
+	}
+
+	public GerenciadorDeMensagens getGerenciadorDeMensagens() {
+		return gerenciadorDeMensagens;
+	}
+
+	public GerenciadorDeSessoes getGerenciadorDeSessoes() {
+		return gerenciadorDeSessoes;
 	}
 }

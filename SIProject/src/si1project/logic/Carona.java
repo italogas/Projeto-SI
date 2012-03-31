@@ -9,7 +9,6 @@ public class Carona {
 	private int vagas;
 	private String hora;
 	
-
 	public Carona(int idSessao2, String origem2, String destino2,
 			String data2, String hora2, int vagas2) {
 			setIdSessao(idSessao2);

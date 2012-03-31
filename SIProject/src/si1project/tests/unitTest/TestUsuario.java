@@ -1,4 +1,4 @@
-package unitTest;
+package si1project.tests.unitTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
