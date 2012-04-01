@@ -4,7 +4,7 @@ package si1project.logic;
 
 public class Mensagem {
 	TipoMensagem tipo;
-	int idMenssagem;
+	int idMensagem;
 	int idRemetente;
 	int idDestinatario;
 	String text;
@@ -14,11 +14,7 @@ public class Mensagem {
 		setIdDestinatario(idDestinatario);
 		setIdRemetente(idRemetente);
 		setTipo(tipo);
-		setId(this.hashCode());
-	}
-	
-	private void setId(int hashCode) {
-		this.idMenssagem = hashCode;
+		setIdMensagem(this.hashCode());
 	}
 	
 	public TipoMensagem getTipo() {
@@ -29,12 +25,12 @@ public class Mensagem {
 		this.tipo = tipo;
 	}
 	
-	public int getIdMenssagem() {
-		return idMenssagem;
+	public int getIdMensagem() {
+		return idMensagem;
 	}
 	
-	public void setIdMenssagem(int idMenssagem) {
-		this.idMenssagem = idMenssagem;
+	public void setIdMensagem(int idMensagem) {
+		this.idMensagem = idMensagem;
 	}
 	
 	public int getIdRemetente() {

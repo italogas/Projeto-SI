@@ -2,57 +2,61 @@ package si1project.logic;
 
 
 public class Sessao {
-	private Usuario user;
-	private int id;
-	
-	public Sessao(Usuario user) {
-		setUser(user);
-		setId(this.hashCode());
+	private int idUser;
+	private int idSessao;
+
+	public Sessao(int idUsuario) {
+		setIdUser(idUsuario);
+		setId(this.hashCode()); // id da propria sessao
 	}
 	
-	public Usuario getUser() {
-		return user;
+	public int getIdSessao() {
+		return idSessao;
+	}
+
+	public void setIdSessao(int idSessao) {
+		this.idSessao = idSessao;
+	}
+	
+	public int getIdUser() {
+		return idUser;
 	}
 	
 	private void setId(int hashCode) {
-		this.id = hashCode;
+		this.idSessao = hashCode;
 	}
 
-	/* isso estah estranho, nao eh o usuario, mas sim o
-	 * sistema que deve validar as coisas, principalmente
-	 * uma sessao 
-	 */
-	public int abrirSessao(String login, String senha){
-		//user.validaSessao(login, senha);
-		return this.id;
-		
-	}
-	private void setUser(Usuario user2) {
-		//TODO: testes
-		this.user = user2;
+	private void setIdUser(int idUsuario) {
+		this.idUser = idUsuario;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + idSessao;
+		result = prime * result + idUser;
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof Sessao)) {
 			return false;
+		}
 		Sessao other = (Sessao) obj;
-		if (id != other.id)
+		if (idSessao != other.idSessao) {
 			return false;
+		}
+		if (idUser != other.idUser) {
+			return false;
+		}
 		return true;
 	}
-
-	
 }

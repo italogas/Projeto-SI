@@ -3,29 +3,28 @@ package si1project.logic;
 import java.util.List;
 
 public class SistemaCaronas {
-	MapaLoginUsuario mapaLoginUsuarios;
-	MapaIdCarona mapaIdCaronas;
-	GerenciadorDeMensagens gerenciadorDeMensagens;
-	GerenciadorDeSessoes gerenciadorDeSessoes;
-
+	GerenciadorDeSessoes gerenciadorDeSessoes = new GerenciadorDeSessoes();
+	GerenciadorDeMensagens gerenciadorDeMensagens = new GerenciadorDeMensagens();
+	GerenciadorDeCaronas gerenciadorDeCaronas = new GerenciadorDeCaronas();
+	GerenciadorDeUsuarios gerenciadorDeUsuarios = new GerenciadorDeUsuarios();
+	
 	public void criarUsuario(String login, String senha, String nome,
 			String endereco, String email) throws Exception {
-		Usuario u = new Usuario(login, senha, nome, endereco, email);	
-		mapaLoginUsuarios.addUsuario(u);
+		gerenciadorDeUsuarios.criarUsuario(login, senha, nome, endereco, email);
 	}
 
-	public void criarUsuario(String login, String nome, String endereco) {
-		// TODO
+	public void criarUsuario(String login, String nome, String endereco) throws Exception {
+		gerenciadorDeUsuarios.criarUsuario(login, nome, endereco);
 	}
 
 	public void criarUsuario(String login, String nome, String endereco,
-			String email) {
-		// TODO
+			String email) throws Exception {
+		gerenciadorDeUsuarios.criarUsuario(login, nome, endereco, email);
 	}
 
 	public void cadastrarCarona(int idSessao, String origem, String destino,
 			String data, String hora, int vagas)  throws Exception  {
-		// TODO
+		gerenciadorDeCaronas.cadastrarCarona(idSessao, origem, destino, data, hora, vagas);
 	}
 
 	/*
@@ -33,41 +32,34 @@ public class SistemaCaronas {
 	 */
 	public List<Integer> localizarCarona(int idSessao, String origem,
 			String destino)  throws Exception {
-		// TODO
-		return null;
+		return gerenciadorDeCaronas.localizarCarona(idSessao, origem, destino);
 	}
 
 	public Object getAtributoCarona(int idCarona, String nomeAtributo) throws Exception {
-		return   ((Carona) mapaIdCaronas.get(idCarona)).getAtributo(nomeAtributo);
+		return gerenciadorDeCaronas.getAtributoCarona(idCarona, nomeAtributo);
 	}
 
-	public Object getAtributoUsuario(String login, String atributo) throws Exception  {
-		return   ((Usuario) mapaLoginUsuarios.get(login)).getAtributo(atributo);
+	public String getAtributoUsuario(String login, String atributo) throws Exception  {
+		return gerenciadorDeUsuarios.getAtributoUsuario(login, atributo);
 	}
 
 	public String getTrajeto(int idCarona) {
-		// TODO
-		return null;
+		return gerenciadorDeCaronas.getTrajeto(idCarona);
 	}
 
-	public Carona getCarona(int idCarona)  throws Exception {
-		// TODO
-		return null;
+	public String getCarona(int idCarona)  throws Exception {
+		return gerenciadorDeCaronas.getCarona(idCarona);
 	}
 
 	/*
 	 * Retorna o id da sessao aberta
 	 */
-	public int abrirSessao(String login2, String senha2) {
-		// se nao existe sessao aberta com esse usuario: entao 
-		// cria sessao e valida-a no construtor de sessao
-		// caso contrario busca sessao no mapa e 
-		// TODO
-		return -1;
+	public int abrirSessao(String login2, String senha2) throws Exception {
+		return gerenciadorDeSessoes.abrirSessao(login2, senha2);
 	}
 
 	public void encerrarSessao(String login) {
-		// TODO
+		gerenciadorDeSessoes.encerrarSessao(login);
 	}
 	
 	/*
@@ -87,14 +79,15 @@ public class SistemaCaronas {
 	 * Retorna id da Mensagem enviada
 	 */
 	public int sugerirPontoEncontro(int idSessao, int idCarona,
-			String pontos) {
-		// TODO
+			String ponto) {
+		//return gerenciadorDeMensagens.sugerirPontoEncontro(idSessao, idCarona, ponto);
+		//TODO
 		return -1;
 	}
 
 	public void responderSugestaoPontoEncontro(int idSessao,
 			int idCarona, int idSugestao, String pontos) {
-		// TODO
+		//TODO
 	}
 	
 	/*
@@ -107,7 +100,8 @@ public class SistemaCaronas {
 	}
 
 	public Object getAtributoSolicitacao(int idSolicitacao, String atributo) {
-		// TODO
+		//TODO
+		//return gerenciadorDeMensagens.getAtributoSolicitacao(idSolicitacao, atributo);
 		return null;
 	}
 
@@ -132,21 +126,5 @@ public class SistemaCaronas {
 
 	public void aceitarSolicitacao(int idSessao, int idSolicitacao) {
 		// TODO
-	}
-
-	public MapaLoginUsuario getMapaLoginUsuarios() {
-		return mapaLoginUsuarios;
-	}
-
-	public MapaIdCarona getMapaIdCaronas() {
-		return mapaIdCaronas;
-	}
-
-	public GerenciadorDeMensagens getGerenciadorDeMensagens() {
-		return gerenciadorDeMensagens;
-	}
-
-	public GerenciadorDeSessoes getGerenciadorDeSessoes() {
-		return gerenciadorDeSessoes;
 	}
 }

@@ -1,5 +1,8 @@
 package si1project.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Carona {
 	private Integer idSessao;
 	private Integer idCarona;
@@ -8,6 +11,8 @@ public class Carona {
 	private String data;
 	private int vagas;
 	private String hora;
+	
+	private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
 	
 	public Carona(int idSessao2, String origem2, String destino2,
 			String data2, String hora2, int vagas2) {

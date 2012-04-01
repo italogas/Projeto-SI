@@ -1,11 +1,16 @@
 package si1project.logic;
 
+import java.util.List;
+
 public class Usuario {
+	private int idUsuario;
 	private String login;
 	private String email;
 	private String senha;
 	private String nome;
 	private String endereco;
+	private List<Carona> listaCaronasOferecidas;
+	private List<Carona> listaCaronasPegas;
 
 	public Usuario(String login, String senha, String nome, String endereco, String email) throws Exception{
 		setLogin(login);
@@ -13,14 +18,38 @@ public class Usuario {
 		setNome(nome);
 		setEndereco(endereco);
 		setEmail(email);
+		setIdUsuario(this.hashCode());
 	}
 	
+	public Usuario(String login2, String nome2, String endereco2) throws Exception {
+		setLogin(login2);
+		setNome(nome2);
+		setEndereco(endereco2);
+		setIdUsuario(this.hashCode());
+	}
+
+	public Usuario(String login2, String nome2, String endereco2, String email2) throws Exception {
+		setLogin(login2);
+		setNome(nome2);
+		setEndereco(endereco2);
+		setEmail(email2);
+		setIdUsuario(this.hashCode());
+	}
+
+	private void setIdUsuario(int hashCode) {
+		this.idUsuario = hashCode;
+	}
+	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
 	public String getLogin() {
 		return login;
 	}
 
 	public void setLogin(String login) throws Exception {
-		if(login == null || login.equals(""))
+		if( login == null || login.equals("") )
 			throw new Exception("Login inválido");
 		this.login = login;
 	}
@@ -65,10 +94,7 @@ public class Usuario {
 		this.endereco = endereco;
 	}
 
-	/*
-	 * Retorna null se o atributo nao existir.
-	 */
-	public Object getAtributo(String nomeAtributo) throws Exception {
+	public String getAtributo(String nomeAtributo) throws Exception {
 		if(nomeAtributo == null || nomeAtributo.equals(""))
 			throw new Exception("Atributo inválido");
 		
@@ -134,6 +160,16 @@ public class Usuario {
 		} else if (!senha.equals(other.senha))
 			return false;
 		return true;
+	}
+
+	public int sugerirPontoEncontro(int idSessao, int idCarona, String ponto) {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+	public void cadastrarCarona(int idSessao, String origem, String destino, String data,
+			String hora, int vagas) {
+		listaCaronasOferecidas.add(new Carona(idSessao, origem, destino, data, hora, vagas));
 	}
 
 	
