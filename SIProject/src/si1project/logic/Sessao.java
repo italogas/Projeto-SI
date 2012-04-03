@@ -34,7 +34,6 @@ public class Sessao {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idSessao;
 		result = prime * result + idUser;
 		return result;
 	}

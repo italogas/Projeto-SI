@@ -172,6 +172,8 @@ public class Usuario {
 		listaCaronasOferecidas.add(new Carona(idSessao, origem, destino, data, hora, vagas));
 	}
 
-	
+	public boolean validaSenha(String senha){
+		return this.senha.equals(senha);
+	}
 	
 }
