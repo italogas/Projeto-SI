@@ -163,7 +163,7 @@ public class Usuario {
 		return true;
 	}
 
-	public void cadastrarCarona(int idSessao, String origem, String destino, String data,
+	public void cadastrarCarona(String idSessao, String origem, String destino, String data,
 			String hora, int vagas) throws Exception {
 		listaCaronasOferecidas.add(new Carona(idSessao, origem, destino, data, hora, vagas));
 	}

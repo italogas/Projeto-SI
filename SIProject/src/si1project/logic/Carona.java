@@ -1,17 +1,17 @@
 package si1project.logic;
 
 public class Carona {
-	private Integer idSessao;
+	private String idSessao;
 	private Integer idCarona;
 	private String origem;
 	private String destino;
 	private String data;
-	private int vagas;
+	private Integer vagas;
 	private String hora;
 	
 	//private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
-	
-	public Carona(int idSessao2, String origem2, String destino2,
+
+	public Carona(String idSessao2, String origem2, String destino2,
 			String data2, String hora2, int vagas2) throws Exception {
 			setIdSessao(idSessao2);
 			setOrigem(origem2);
@@ -29,6 +29,10 @@ public class Carona {
 		this.idCarona = idCarona;
 	}
 
+	public void setIdCarona(int hashCode) {
+		this.idCarona = hashCode;
+	}
+
 	public String getHora() {
 		return hora;
 	}
@@ -39,11 +43,11 @@ public class Carona {
 		this.hora = hora;
 	}
 
-	public int getIdSessao() {
+	public String getIdSessao() {
 		return idSessao;
 	}
 
-	public void setIdSessao(int idSessao2) {
+	public void setIdSessao(String idSessao2) {
 		this.idSessao = idSessao2;
 	}
 
@@ -77,7 +81,7 @@ public class Carona {
 		this.data = data;
 	}
 
-	public int getVagas() {
+	public Integer getVagas() {
 		return vagas;
 	}
 

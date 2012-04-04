@@ -3,18 +3,18 @@ package si1project.logic;
 
 public class Sessao {
 	private int idUser;
-	private int idSessao;
+	private String idSessao;
 
 	public Sessao(int idUsuario) {
 		setIdUser(idUsuario);
-		setId(this.hashCode()); // id da propria sessao
+		setId(this.hashCode() + ""); // id da propria sessao
 	}
 	
-	public int getIdSessao() {
+	public String getIdSessao() {
 		return idSessao;
 	}
 
-	public void setIdSessao(int idSessao) {
+	public void setIdSessao(String idSessao) {
 		this.idSessao = idSessao;
 	}
 	
@@ -22,7 +22,7 @@ public class Sessao {
 		return idUser;
 	}
 	
-	private void setId(int hashCode) {
+	private void setId(String hashCode) {
 		this.idSessao = hashCode;
 	}
 
