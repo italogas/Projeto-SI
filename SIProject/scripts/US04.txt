@@ -33,7 +33,7 @@ criarUsuario login="bill" nome="William Henry Gates III" endereco="Medina, Washi
 sessaoBill=abrirSessao login="bill" senha="b1ll"
 
 #Sugerir ponto de encontro para uma carona
-sugestaoID = sugerirPontoEncontro idSessao=${sessaoBill} idCarona=${carona4ID} pontos="Acude Velho; Hiper Bompreco"
+sugestaoID=sugerirPontoEncontro idSessao=${sessaoBill} idCarona=${carona4ID} pontos="Acude Velho; Hiper Bompreco"
 encerrarSessao login="bill"
 
 #Resposta a requisicao

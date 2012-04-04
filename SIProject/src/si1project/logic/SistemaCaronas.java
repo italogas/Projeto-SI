@@ -1,5 +1,6 @@
 package si1project.logic;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -8,7 +9,7 @@ import java.util.TreeMap;
 public class SistemaCaronas {
 	private Map<String, Usuario> mapLoginUser = new TreeMap<String, Usuario>();
 	private Map<String, Sessao> mapIdSessao = new TreeMap<String, Sessao>(); // contem apenas sessoes abertas
-	private Map<Integer, Carona> mapIdCarona = new TreeMap<Integer, Carona>();
+	private Map<String, Carona> mapIdCarona = new TreeMap<String, Carona>();
 
 	public void criarUsuario(String login, String senha, String nome,
 			String endereco, String email) throws Exception {
@@ -50,7 +51,7 @@ public class SistemaCaronas {
 		}
 	}
 
-	public Integer cadastrarCarona(String idSessao, String origem, String destino,
+	public String cadastrarCarona(String idSessao, String origem, String destino,
 			String data, String hora, Integer vagas) throws Exception {
 		if(idSessao == null || idSessao.equals(""))
 			throw new Exception("Sessão inválida");
@@ -100,43 +101,41 @@ public class SistemaCaronas {
 	 * Retorna uma lista de id's de caronas. Localiza
 	 * caronas na sessao identificada por idSessao
 	 */
-	public List<Integer> localizarCarona(String idSessao, String origem,
+	public List<String> localizarCarona(String idSessao, String origem,
 			String destino) throws Exception {
+		
 		if(idSessao == null)
 			throw new Exception("IdSessao nulo");
-		if(origem == null || destino.equals(""))
+		if(origem == null)
 			throw new Exception("Origem inválida");
 		if(destino == null || destino.equals(""))
 			throw new Exception("Destino inválido");
-		for(Usuario u : mapLoginUser.values()) {
-			if(u.getIdUsuario() == mapIdSessao.get(idSessao).getIdUser()) {
-				return u.localizarCarona(origem, destino);
+		
+		List<String> caronasLocalizadas = new LinkedList<String>();
+		
+		for (String idCarona : mapIdCarona.keySet()) {
+			Carona carona = mapIdCarona.get(idCarona);
+			if (carona.getOrigem().equalsIgnoreCase(origem)
+					&& carona.getDestino().equalsIgnoreCase(destino)) {
+				caronasLocalizadas.add(idCarona);
 			}
 		}
-		return null; 
+		return caronasLocalizadas;
 	}
 
-	public Object getAtributoCarona(Integer idCarona, String nomeAtributo)
+	public Object getAtributoCarona(String idCarona, String nomeAtributo)
 			throws Exception {
 		return mapIdCarona.get(idCarona).getAtributo(nomeAtributo);
 	}
 
-	public String getTrajeto(int idCarona) {
+	public String getTrajeto(String idCarona) {
 		return mapIdCarona.get(idCarona).getTrajeto();
 	}
 
-	public String getTrajeto(Integer idCarona) {
-		return mapIdCarona.get(idCarona).getTrajeto();
-	}
-
-	public String getCarona(int idCarona) throws Exception {
+	public String getCarona(String idCarona) throws Exception {
 		return mapIdCarona.get(idCarona).getCarona();
 	}
 	
-	public String getCarona(Integer idCarona) throws Exception {
-		return mapIdCarona.get(idCarona).toString();
-	}
-
 	public void encerrarSessao(String login) {
 		//TODO
 		//mapIdSessao.remove(key);

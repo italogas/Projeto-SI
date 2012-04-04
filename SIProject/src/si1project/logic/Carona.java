@@ -2,7 +2,7 @@ package si1project.logic;
 
 public class Carona {
 	private String idSessao;
-	private Integer idCarona;
+	private String idCarona;
 	private String origem;
 	private String destino;
 	private String data;
@@ -19,17 +19,14 @@ public class Carona {
 			setData(data2);
 			setHora(hora2);
 			setVagas(vagas2);
+			setIdCarona(this.hashCode() + "");
 	}
 
-	public Integer getIdCarona() {
+	public String getIdCarona() {
 		return idCarona;
 	}
 
-	public void setIdCarona(Integer idCarona) {
-		this.idCarona = idCarona;
-	}
-
-	public void setIdCarona(int hashCode) {
+	public void setIdCarona(String hashCode) {
 		this.idCarona = hashCode;
 	}
 

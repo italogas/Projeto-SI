@@ -172,8 +172,8 @@ public class Usuario {
 		return this.senha.equals(senha);
 	}
 
-	public List<Integer> localizarCarona(String origem, String destino) {
-		List<Integer> caronas = new LinkedList<Integer>();
+	public List<String> localizarCarona(String origem, String destino) {
+		List<String> caronas = new LinkedList<String>();
 		for(Carona c : listaCaronasOferecidas) {
 			if(c.getOrigem().equals(origem) && c.getDestino().equals(destino)){
 				caronas.add(c.getIdCarona());
