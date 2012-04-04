@@ -16,8 +16,8 @@ public class GerenciadorDeCaronas {
 
 	public void cadastrarCarona(int idSessao, String origem, String destino,
 			String data, String hora, int vagas) {
-		GerenciadorDeDados.mapaIdUsuario.get(GerenciadorDeDados.mapaIdSessao.get(idSessao).getIdUser()).
-		cadastrarCarona(idSessao, origem, destino, data, hora, vagas);
+		//GerenciadorDeDados.mapaIdUsuario.get(GerenciadorDeDados.mapaIdSessao.get(idSessao).getIdUser()).
+		//cadastrarCarona(idSessao, origem, destino, data, hora, vagas);
 		
 	}
 

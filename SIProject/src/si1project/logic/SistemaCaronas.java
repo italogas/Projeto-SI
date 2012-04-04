@@ -1,15 +1,36 @@
 package si1project.logic;
 
 import java.util.List;
+
+//import java.util.Map;
+//import java.util.TreeMap;
+
 import java.util.Map;
 import java.util.TreeMap;
 
+
 public class SistemaCaronas {
-	Map<String, Usuario> mapLoginUser = new TreeMap<String, Usuario>();
+
+//	static Map<Integer, Sessao> mapaIdSessao = new TreeMap<Integer, Sessao>();
+//	static Map<Integer, Carona> mapaIdCarona = new TreeMap<Integer, Carona>();
+//	static Map<Integer, Mensagem> mapaIdMensagem = new TreeMap<Integer, Mensagem>();
+//	static Map<Integer, Usuario> mapaIdUsuario = new TreeMap<Integer, Usuario>();
+//	
+//	static Map<String, Usuario> mapaLoginUsuario = new TreeMap<String, Usuario>();
+//	static Map<String, Sessao> mapaLoginSessao = new TreeMap<String, Sessao>();
+	
+	GerenciadorDeSessoes gerenciadorDeSessoes = new GerenciadorDeSessoes();
+	GerenciadorDeMensagens gerenciadorDeMensagens = new GerenciadorDeMensagens();
+	GerenciadorDeCaronas gerenciadorDeCaronas = new GerenciadorDeCaronas();
+	GerenciadorDeUsuarios gerenciadorDeUsuarios = new GerenciadorDeUsuarios();
+	
+
+	private Map<String, Usuario> mapLoginUser = new TreeMap<String, Usuario>();
+	private Map<Integer, Sessao> mapIdSessao = new TreeMap<Integer, Sessao>(); // contem apenas sessoes abertas
+	private Map<Integer, Carona> mapaIdCarona = new TreeMap<Integer, Carona>();
 
 	public void criarUsuario(String login, String senha, String nome,
 			String endereco, String email) throws Exception {
-		//TODO refatorar codigo para a criação de usuarios
 		Usuario user = new Usuario(login, senha, nome, endereco, email);
 		
 		for(Usuario u : mapLoginUser.values())
@@ -69,20 +90,15 @@ public class SistemaCaronas {
 		
 		if( !mapLoginUser.containsKey(login) )
 			throw new Exception("Usuário inexistente");
-		
-		if( mapLoginUser.containsKey(login)) {
+		else {
 			user = mapLoginUser.get(login);
 			s = new Sessao(user.getIdUsuario());
 			if(user.validaSenha(senha)){
+				mapIdSessao.put(s.getIdSessao(), s);
 				return s.getIdSessao();
-			}else {
+			} else {
 				throw new Exception("Login inválido");
 			}
-		}
-		
-		else {
-			
-			return s.getIdSessao();
 		}
 	}
 
@@ -97,34 +113,42 @@ public class SistemaCaronas {
 	}
 
 	/*
-	 * Retorna uma lista de id's de caronas
+	 * Retorna uma lista de id's de caronas. Localiza
+	 * caronas na sessao identificada por idSessao
 	 */
-	public List<Integer> localizarCarona(int idSessao, String origem,
+	public List<Integer> localizarCarona(Integer idSessao, String origem,
 			String destino) throws Exception {
-		return null;
-		// return gerenciadorDeCaronas.localizarCarona(idSessao, origem,
-		// destino);
+		if(idSessao == null)
+			throw new Exception("IdSessao nulo");
+		//System.out.println("idSessao: " + idSessao);
+		if(origem == null || destino.equals(""))
+			throw new Exception("Origem inválida");
+		if(destino == null || destino.equals(""))
+			throw new Exception("Destino inválido");
+		for(Usuario u : mapLoginUser.values()) {
+			if(u.getIdUsuario() == mapIdSessao.get(idSessao).getIdUser()) {
+				return u.localizarCarona(origem, destino);
+			}
+		}
+		return null; 
 	}
 
 	public Object getAtributoCarona(int idCarona, String nomeAtributo)
 			throws Exception {
-		return nomeAtributo;
-		// return gerenciadorDeCaronas.getAtributoCarona(idCarona,
-		// nomeAtributo);
+		return mapaIdCarona.get(idCarona).getAtributo(nomeAtributo); 
 	}
 
 	public String getTrajeto(int idCarona) {
-		return null;
-		// return gerenciadorDeCaronas.getTrajeto(idCarona);
+		return mapaIdCarona.get(idCarona).getTrajeto();
 	}
 
 	public String getCarona(int idCarona) throws Exception {
-		return null;
-		// return gerenciadorDeCaronas.getCarona(idCarona);
+		return mapaIdCarona.get(idCarona).getCarona();
 	}
 
 	public void encerrarSessao(String login) {
-		// gerenciadorDeSessoes.encerrarSessao(login);
+		//TODO
+		//mapIdSessao.remove(key);
 	}
 
 	/*
@@ -132,7 +156,9 @@ public class SistemaCaronas {
 	 * sistema
 	 */
 	public void zerarSistema() {
-		// TODO
+		mapLoginUser.clear();
+		mapIdSessao.clear();
+		mapaIdCarona.clear();
 	}
 
 	public void encerrarSistema() {

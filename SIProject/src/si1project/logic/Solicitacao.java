@@ -4,7 +4,7 @@ public class Solicitacao {
 	private String origem;
 	private String destino;
 	private String pontoEncontro;
-	private Mensagem mensagem; // composicao preferencialmente a heranca
+	//private Mensagem mensagem; // composicao preferencialmente a heranca
 	
 	public Solicitacao(int idSessao, int idCarona, String ponto) {
 		//TODO

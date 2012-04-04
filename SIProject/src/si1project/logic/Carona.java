@@ -1,8 +1,5 @@
 package si1project.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Carona {
 	private Integer idSessao;
 	private Integer idCarona;
@@ -12,25 +9,33 @@ public class Carona {
 	private int vagas;
 	private String hora;
 	
-	private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
+	//private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
 	
 	public Carona(int idSessao2, String origem2, String destino2,
-			String data2, String hora2, int vagas2) {
+			String data2, String hora2, int vagas2) throws Exception {
 			setIdSessao(idSessao2);
 			setOrigem(origem2);
 			setDestino(destino2);
 			setData(data2);
 			setHora(hora2);
 			setVagas(vagas2);
-			//TODO
+	}
+
+	public Integer getIdCarona() {
+		return idCarona;
+	}
+
+	public void setIdCarona(Integer idCarona) {
+		this.idCarona = idCarona;
 	}
 
 	public String getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
-		//TODO
+	public void setHora(String hora) throws Exception {
+		if(hora == null || hora.equals(""))
+			throw new Exception("Hora inválida");
 		this.hora = hora;
 	}
 
@@ -38,56 +43,52 @@ public class Carona {
 		return idSessao;
 	}
 
-
 	public void setIdSessao(int idSessao2) {
-		//TODO
 		this.idSessao = idSessao2;
 	}
-
 
 	public String getOrigem() {
 		return origem;
 	}
 
-
-	public void setOrigem(String origem) {
-		//TODO
+	public void setOrigem(String origem) throws Exception {
+		if(origem == null || origem.equals(""))
+			throw new Exception("Origem inválida");
 		this.origem = origem;
 	}
-
 
 	public String getDestino() {
 		return destino;
 	}
 
-	public void setDestino(String destino) {
-		//TODO
+	public void setDestino(String destino) throws Exception {
+		if(destino == null || destino.equals(""))
+			throw new Exception("Destino inválido");
 		this.destino = destino;
 	}
-
 
 	public String getData() {
 		return data;
 	}
 
-	public void setData(String data) {
-		//TODO
+	public void setData(String data) throws Exception {
+		if(data == null || data.equals(""))
+			throw new Exception("Data inválida");
 		this.data = data;
 	}
-
 
 	public int getVagas() {
 		return vagas;
 	}
 
-	public void setVagas(int vagas) {
-		//TODO
+	public void setVagas(int vagas) throws Exception {
+		if(vagas <= 0)
+			throw new Exception("Vagas inválida");
 		this.vagas = vagas;
 	}
 
 	public String getTrajeto() {
-		//TODO
-		return null;
+		return this.origem + " - " + this.destino;
 	}
 
 	@Override
@@ -98,7 +99,7 @@ public class Carona {
 		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
 		result = prime * result + ((hora == null) ? 0 : hora.hashCode());
 		result = prime * result
-				+ ((idCarona == null) ? 0 : idCarona.hashCode());
+				+ ((getIdCarona() == null) ? 0 : getIdCarona().hashCode());
 		result = prime * result
 				+ ((idSessao == null) ? 0 : idSessao.hashCode());
 		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
@@ -139,11 +140,11 @@ public class Carona {
 		} else if (!hora.equals(other.hora)) {
 			return false;
 		}
-		if (idCarona == null) {
-			if (other.idCarona != null) {
+		if (getIdCarona() == null) {
+			if (other.getIdCarona() != null) {
 				return false;
 			}
-		} else if (!idCarona.equals(other.idCarona)) {
+		} else if (!getIdCarona().equals(other.getIdCarona())) {
 			return false;
 		}
 		if (idSessao == null) {
@@ -168,15 +169,28 @@ public class Carona {
 
 	@Override
 	public String toString() {
-		return "Carona [origem=" + origem + ", destino=" + destino + ", data="
-				+ data + ", vagas=" + vagas + ", hora=" + hora + "]";
+		return this.origem + " para " + this.destino + ", no dia " + this.data + ", as " + hora;
 	}
 
-	public Object getAtributo(String nomeAtributo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getAtributo(String nomeAtributo) throws Exception {
+		if(nomeAtributo == null || nomeAtributo.equals(""))
+			throw new Exception("Atributo inválido");
+		
+		if(nomeAtributo.equals("origem"))
+			return this.getOrigem();
+		else if(nomeAtributo.equals("destino"))
+			return this.getDestino();
+		else if(nomeAtributo.equals("data"))
+			return this.getData();
+		else if(nomeAtributo.equals("hora"))
+			return this.getHora();
+		else if(nomeAtributo.equals("vagas"))
+			return this.getVagas();
+		else
+			throw new Exception("Atributo inexistente");
 	}
-
-
 	
+	public String getCarona() {
+		return this.toString();
+	}
 }

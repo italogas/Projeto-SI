@@ -12,7 +12,7 @@ public class SistemaCaronasTest {
          
 		 //Put the testScript1 file into the "test scripts" list
          files.add("scripts/US01.txt");
-//         files.add("scripts/US02.txt");
+         files.add("scripts/US02.txt");
 //         files.add("scripts/US03.txt");
 //         files.add("scripts/US04.txt");
 //         files.add("scripts/US05.txt");

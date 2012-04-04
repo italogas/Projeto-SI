@@ -1,5 +1,6 @@
 package si1project.logic;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Usuario {
@@ -162,18 +163,28 @@ public class Usuario {
 		return true;
 	}
 
-	public int sugerirPontoEncontro(int idSessao, int idCarona, String ponto) {
-		// TODO Auto-generated method stub
-		return -1;
-	}
-
 	public void cadastrarCarona(int idSessao, String origem, String destino, String data,
-			String hora, int vagas) {
+			String hora, int vagas) throws Exception {
 		listaCaronasOferecidas.add(new Carona(idSessao, origem, destino, data, hora, vagas));
 	}
 
 	public boolean validaSenha(String senha){
 		return this.senha.equals(senha);
+	}
+
+	public List<Integer> localizarCarona(String origem, String destino) {
+		List<Integer> caronas = new LinkedList<Integer>();
+		for(Carona c : listaCaronasOferecidas) {
+			if(c.getOrigem().equals(origem) && c.getDestino().equals(destino)){
+				caronas.add(c.getIdCarona());
+			}
+		}
+		for(Carona c : listaCaronasPegas) {
+			if(c.getOrigem().equals(origem) && c.getDestino().equals(destino)){
+				caronas.add(c.getIdCarona());
+			}
+		}
+		return caronas;
 	}
 	
 }

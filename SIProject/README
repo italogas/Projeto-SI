@@ -1,2 +1,0 @@
-Projeto da Disciplina de SI1 para criação de um 
-sistema que consiste em uma rede social na web para compartilhamento de caronas.
