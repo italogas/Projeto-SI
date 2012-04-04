@@ -12,7 +12,7 @@ public class Carona {
 	//private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
 
 	public Carona(String idSessao2, String origem2, String destino2,
-			String data2, String hora2, int vagas2) throws Exception {
+			String data2, String hora2, Integer vagas2) throws Exception {
 			setIdSessao(idSessao2);
 			setOrigem(origem2);
 			setDestino(destino2);
@@ -82,7 +82,7 @@ public class Carona {
 		return vagas;
 	}
 
-	public void setVagas(int vagas) throws Exception {
+	public void setVagas(Integer vagas) throws Exception {
 		if(vagas <= 0)
 			throw new Exception("Vagas inválida");
 		this.vagas = vagas;

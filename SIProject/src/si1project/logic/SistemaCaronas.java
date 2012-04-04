@@ -108,7 +108,7 @@ public class SistemaCaronas {
 			throw new Exception("IdSessao nulo");
 		if(origem == null)
 			throw new Exception("Origem inválida");
-		if(destino == null || destino.equals(""))
+		if(destino == null)
 			throw new Exception("Destino inválido");
 		
 		List<String> caronasLocalizadas = new LinkedList<String>();
@@ -128,7 +128,11 @@ public class SistemaCaronas {
 		return mapIdCarona.get(idCarona).getAtributo(nomeAtributo);
 	}
 
-	public String getTrajeto(String idCarona) {
+	public String getTrajeto(String idCarona) throws Exception {
+		if(idCarona == null || idCarona.equals("") )
+			throw new Exception("Trajeto inexistente");
+		if(!mapIdCarona.containsKey(idCarona))
+			throw new Exception("Trajeto inválida");
 		return mapIdCarona.get(idCarona).getTrajeto();
 	}
 
