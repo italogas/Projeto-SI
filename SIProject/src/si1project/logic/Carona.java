@@ -9,12 +9,12 @@ public class Carona {
 	private String origem;
 	private String destino;
 	private String data;
-	private int vagas;
+	private Integer vagas;
 	private String hora;
 	
 	private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
 	
-	public Carona(int idSessao2, String origem2, String destino2,
+	public Carona(Integer idSessao2, String origem2, String destino2,
 			String data2, String hora2, int vagas2) {
 			setIdSessao(idSessao2);
 			setOrigem(origem2);
@@ -22,7 +22,13 @@ public class Carona {
 			setData(data2);
 			setHora(hora2);
 			setVagas(vagas2);
+			setIdCarona(hashCode());
 			//TODO
+	}
+
+	public void setIdCarona(int hashCode) {
+		this.idCarona = hashCode;
+		
 	}
 
 	public String getHora() {
@@ -76,7 +82,7 @@ public class Carona {
 	}
 
 
-	public int getVagas() {
+	public Integer getVagas() {
 		return vagas;
 	}
 
@@ -86,8 +92,7 @@ public class Carona {
 	}
 
 	public String getTrajeto() {
-		//TODO
-		return null;
+		return origem + " - " + destino;
 	}
 
 	@Override
@@ -168,13 +173,30 @@ public class Carona {
 
 	@Override
 	public String toString() {
-		return "Carona [origem=" + origem + ", destino=" + destino + ", data="
-				+ data + ", vagas=" + vagas + ", hora=" + hora + "]";
+		return origem + " para " + destino + ", no dia " + data + ", as " + hora;
 	}
 
 	public Object getAtributo(String nomeAtributo) {
-		// TODO Auto-generated method stub
+		if (nomeAtributo.equalsIgnoreCase("idCarona")) {
+			return idCarona;
+		}else if (nomeAtributo.equalsIgnoreCase("idSessao")) {
+			return idSessao;
+		}else if (nomeAtributo.equalsIgnoreCase("origem")) {
+			return origem;
+		}else if (nomeAtributo.equalsIgnoreCase("destino")) {
+			return destino;
+		}else if (nomeAtributo.equalsIgnoreCase("data")) {
+			return data;
+		}else if (nomeAtributo.equalsIgnoreCase("vagas")) {
+			return vagas;
+		}else if (nomeAtributo.equalsIgnoreCase("hora")) {
+			return hora;
+		}
 		return null;
+	}
+
+	public Integer getIdCarona() {
+		return idCarona;
 	}
 
 
