@@ -55,6 +55,9 @@ public class SistemaCaronas {
 			String data, String hora, String vagas) throws Exception {
 		if(idSessao == null || idSessao.equals(""))
 			throw new Exception("Sessão inválida");
+		if(data == null || data.equals("") || !DateUtil.validaData(data) || DateUtil.datajapassou(data)){
+			throw new Exception("Data inválida");
+		}
 		if(!mapIdSessao.containsKey(idSessao))
 			throw new Exception("Sessão inexistente");
 		Carona carona = new Carona(idSessao, origem, destino, data, hora, vagas);
