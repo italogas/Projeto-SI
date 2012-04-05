@@ -164,7 +164,7 @@ public class Usuario {
 	}
 
 	public void cadastrarCarona(String idSessao, String origem, String destino, String data,
-			String hora, int vagas) throws Exception {
+			String hora, String vagas) throws Exception {
 		listaCaronasOferecidas.add(new Carona(idSessao, origem, destino, data, hora, vagas));
 	}
 

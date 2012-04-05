@@ -6,13 +6,13 @@ public class Carona {
 	private String origem;
 	private String destino;
 	private String data;
-	private Integer vagas;
+	private String vagas;
 	private String hora;
 	
 	//private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
 
 	public Carona(String idSessao2, String origem2, String destino2,
-			String data2, String hora2, Integer vagas2) throws Exception {
+			String data2, String hora2, String vagas2) throws Exception {
 			setIdSessao(idSessao2);
 			setOrigem(origem2);
 			setDestino(destino2);
@@ -37,6 +37,7 @@ public class Carona {
 	public void setHora(String hora) throws Exception {
 		if(hora == null || hora.equals(""))
 			throw new Exception("Hora inválida");
+		//TODO fazer verificacao de hora valida batendo com o relogio
 		this.hora = hora;
 	}
 
@@ -75,23 +76,28 @@ public class Carona {
 	public void setData(String data) throws Exception {
 		if(data == null || data.equals(""))
 			throw new Exception("Data inválida");
+		//TODO fazer checagem para datas batendo com o calendario
 		this.data = data;
 	}
 
-	public Integer getVagas() {
+	public String getVagas() {
 		return vagas;
 	}
 
-	public void setVagas(Integer vagas) throws Exception {
-		if(vagas <= 0)
-			throw new Exception("Vagas inválida");
-		this.vagas = vagas;
+	public void setVagas(String vagas2) throws Exception {
+		if(vagas2 == null || vagas2.equals(""))
+			throw new Exception("Vaga inválida");
+		
+		if(Integer.parseInt(vagas2) <= 0)
+			throw new Exception("Vaga inválida");
+		
+		this.vagas = vagas2;
 	}
 
 	public String getTrajeto() {
 		return this.origem + " - " + this.destino;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,11 +106,11 @@ public class Carona {
 		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
 		result = prime * result + ((hora == null) ? 0 : hora.hashCode());
 		result = prime * result
-				+ ((getIdCarona() == null) ? 0 : getIdCarona().hashCode());
+				+ ((idCarona == null) ? 0 : idCarona.hashCode());
 		result = prime * result
 				+ ((idSessao == null) ? 0 : idSessao.hashCode());
 		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
-		result = prime * result + vagas;
+		result = prime * result + ((vagas == null) ? 0 : vagas.hashCode());
 		return result;
 	}
 
@@ -141,11 +147,11 @@ public class Carona {
 		} else if (!hora.equals(other.hora)) {
 			return false;
 		}
-		if (getIdCarona() == null) {
-			if (other.getIdCarona() != null) {
+		if (idCarona == null) {
+			if (other.idCarona != null) {
 				return false;
 			}
-		} else if (!getIdCarona().equals(other.getIdCarona())) {
+		} else if (!idCarona.equals(other.idCarona)) {
 			return false;
 		}
 		if (idSessao == null) {
@@ -162,7 +168,11 @@ public class Carona {
 		} else if (!origem.equals(other.origem)) {
 			return false;
 		}
-		if (vagas != other.vagas) {
+		if (vagas == null) {
+			if (other.vagas != null) {
+				return false;
+			}
+		} else if (!vagas.equals(other.vagas)) {
 			return false;
 		}
 		return true;

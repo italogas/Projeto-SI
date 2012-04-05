@@ -52,7 +52,7 @@ public class SistemaCaronas {
 	}
 
 	public String cadastrarCarona(String idSessao, String origem, String destino,
-			String data, String hora, Integer vagas) throws Exception {
+			String data, String hora, String vagas) throws Exception {
 		if(idSessao == null || idSessao.equals(""))
 			throw new Exception("Sessão inválida");
 		if(!mapIdSessao.containsKey(idSessao))
@@ -113,6 +113,10 @@ public class SistemaCaronas {
 		
 		List<String> caronasLocalizadas = new LinkedList<String>();
 		
+		// se origem=="" e destino!="" ==> retorna todas as caronas para aquele destino
+		
+		// se origem!="" e destino=="" ==> retorna todas as caronas daquela origem
+		
 		for (String idCarona : mapIdCarona.keySet()) {
 			Carona carona = mapIdCarona.get(idCarona);
 			if (carona.getOrigem().equalsIgnoreCase(origem)
@@ -125,18 +129,26 @@ public class SistemaCaronas {
 
 	public Object getAtributoCarona(String idCarona, String nomeAtributo)
 			throws Exception {
+		if(idCarona == null || idCarona.equals(""))
+			throw new Exception("Identificador do carona é inválido");
+		if(!mapIdCarona.containsKey(idCarona))
+			throw new Exception("Item inexistente");
 		return mapIdCarona.get(idCarona).getAtributo(nomeAtributo);
 	}
 
 	public String getTrajeto(String idCarona) throws Exception {
-		if(idCarona == null || idCarona.equals("") )
-			throw new Exception("Trajeto inexistente");
-		if(!mapIdCarona.containsKey(idCarona))
-			throw new Exception("Trajeto inválida");
+		if(idCarona == null)
+			throw new Exception("Trajeto Inválida");
+		if(idCarona.equals("") || !mapIdCarona.containsKey(idCarona))
+			throw new Exception("Trajeto Inexistente");
 		return mapIdCarona.get(idCarona).getTrajeto();
 	}
 
 	public String getCarona(String idCarona) throws Exception {
+		if(idCarona == null)
+				throw new Exception("Carona Inválida");
+		if(idCarona.equals("") || !mapIdCarona.containsKey(idCarona))
+			throw new Exception("Carona Inexistente");
 		return mapIdCarona.get(idCarona).getCarona();
 	}
 	
