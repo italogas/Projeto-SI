@@ -2,16 +2,19 @@ package si1project2.logic;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Usuario {
-	private int idUsuario;
+	private String idUsuario;
 	private String login;
 	private String email;
 	private String senha;
 	private String nome;
 	private String endereco;
-	private List<Carona> listaCaronasOferecidas;
-	private List<Carona> listaCaronasPegas;
+
+	private Map<String, Carona> mapIdCaronasPegas = new TreeMap<String, Carona>();
+	private Map<String, Carona> mapIdCaronasOferecidas = new TreeMap<String, Carona>();
 
 	public Usuario(String login, String senha, String nome, String endereco, String email) throws Exception{
 		setLogin(login);
@@ -19,29 +22,22 @@ public class Usuario {
 		setNome(nome);
 		setEndereco(endereco);
 		setEmail(email);
-		setIdUsuario(this.hashCode());
+		setIdUsuario(this.hashCode() + "");
 	}
 	
-	public Usuario(String login2, String nome2, String endereco2) throws Exception {
+	public Usuario(String login2, String senha2, String nome2, String endereco2) throws Exception {
 		setLogin(login2);
+		setSenha(senha2);
 		setNome(nome2);
 		setEndereco(endereco2);
-		setIdUsuario(this.hashCode());
+		setIdUsuario(this.hashCode() + "");
 	}
 
-	public Usuario(String login2, String nome2, String endereco2, String email2) throws Exception {
-		setLogin(login2);
-		setNome(nome2);
-		setEndereco(endereco2);
-		setEmail(email2);
-		setIdUsuario(this.hashCode());
-	}
-
-	private void setIdUsuario(int hashCode) {
-		this.idUsuario = hashCode;
+	private void setIdUsuario(String string) {
+		this.idUsuario = string;
 	}
 	
-	public int getIdUsuario() {
+	public String getIdUsuario() {
 		return idUsuario;
 	}
 
@@ -62,6 +58,7 @@ public class Usuario {
 	public void setEmail(String email) throws Exception {
 		if(email == null || email.equals(""))
 			throw new Exception("Email inválido");
+		//TODO criar validador de emails
 		this.email = email;
 	}
 
@@ -112,60 +109,15 @@ public class Usuario {
 		else
 			throw new Exception("Atributo inexistente");
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (login == null) {
-			if (other.login != null)
-				return false;
-		} else if (!login.equals(other.login))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
-		return true;
-	}
-
-	public void cadastrarCarona(String idSessao, String origem, String destino, String data,
+	public String cadastrarCarona(String idUsuario, String origem, String destino, String data,
 			String hora, String vagas) throws Exception {
-		listaCaronasOferecidas.add(new Carona(idSessao, origem, destino, data, hora, vagas));
+		
+		Carona carona = new Carona(idUsuario, origem, destino, data, hora, vagas);
+		//System.out.println("Carona cadastrada id: " + carona.getIdCarona() + " origem: " + origem + " destino: " + destino);
+		mapIdCaronasOferecidas.put(carona.getIdCarona(), carona);
+		
+		return carona.getIdCarona();
 	}
 
 	public boolean validaSenha(String senha){
@@ -174,17 +126,118 @@ public class Usuario {
 
 	public List<String> localizarCarona(String origem, String destino) {
 		List<String> caronas = new LinkedList<String>();
-		for(Carona c : listaCaronasOferecidas) {
-			if(c.getOrigem().equals(origem) && c.getDestino().equals(destino)){
+		
+		if(origem.equals("") && !destino.equals("")) {
+			for(Carona c : mapIdCaronasOferecidas.values()) {
+				if(c.getDestino().equals(destino)){
+					caronas.add(c.getIdCarona());
+				}
+			}
+		}
+		else if(!origem.equals("") && destino.equals("")) {
+			for(Carona c : mapIdCaronasOferecidas.values()) {
+				if(c.getOrigem().equals(origem)){
+					caronas.add(c.getIdCarona());
+				}
+			}
+		}
+		else if(!origem.equals("") && !destino.equals("")){
+			for(Carona c : mapIdCaronasOferecidas.values()) {
+				if(c.getOrigem().equals(origem) && c.getDestino().equals(destino)){
+					caronas.add(c.getIdCarona());
+				}
+			}
+		}
+		else {
+			for(Carona c : mapIdCaronasOferecidas.values()) {
 				caronas.add(c.getIdCarona());
 			}
 		}
-		for(Carona c : listaCaronasPegas) {
-			if(c.getOrigem().equals(origem) && c.getDestino().equals(destino)){
-				caronas.add(c.getIdCarona());
-			}
-		}
+			
 		return caronas;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result
+				+ ((idUsuario == null) ? 0 : idUsuario.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Usuario)) {
+			return false;
+		}
+		Usuario other = (Usuario) obj;
+		if (endereco == null) {
+			if (other.endereco != null) {
+				return false;
+			}
+		} else if (!endereco.equals(other.endereco)) {
+			return false;
+		}
+		if (idUsuario == null) {
+			if (other.idUsuario != null) {
+				return false;
+			}
+		} else if (!idUsuario.equals(other.idUsuario)) {
+			return false;
+		}
+		if (login == null) {
+			if (other.login != null) {
+				return false;
+			}
+		} else if (!login.equals(other.login)) {
+			return false;
+		}
+		if (nome == null) {
+			if (other.nome != null) {
+				return false;
+			}
+		} else if (!nome.equals(other.nome)) {
+			return false;
+		}
+		return true;
+	}
+
+	public Object getAtributoCarona(String idCarona, String nomeAtributo) throws Exception {
+		return mapIdCaronasOferecidas.get(idCarona).getAtributo(nomeAtributo);
+	}
 	
+	public String sugerirPontoEncontro(String origem, String destino, String idDonoDaCarona,
+			String idDonoDaSolicitacao, String ponto) {
+		Solicitacao s = new Solicitacao(origem, destino, idDonoDaCarona, idDonoDaSolicitacao, ponto);
+		return s.getIdSolicitacao();
+	}
+
+	public Map<String, Carona> getMapIdCaronasOferecidas() {
+		return this.mapIdCaronasOferecidas;
+	}
+	
+	public String getTrajeto(String idCarona) throws Exception {
+		return mapIdCaronasOferecidas.get(idCarona).getTrajeto(); 
+	}
+
+	public String getCarona(String idCarona) throws Exception {
+			
+		return mapIdCaronasOferecidas.get(idCarona).getCarona();
+	}
+
+	public void zerarSistema() {
+		mapIdCaronasOferecidas.clear();
+		mapIdCaronasPegas.clear();
+	}
 }

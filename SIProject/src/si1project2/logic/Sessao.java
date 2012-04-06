@@ -2,10 +2,10 @@ package si1project2.logic;
 
 
 public class Sessao {
-	private int idUser;
+	private String idUser;
 	private String idSessao;
 
-	public Sessao(int idUsuario) {
+	public Sessao(String idUsuario) {
 		setIdUser(idUsuario);
 		setId(this.hashCode() + ""); // id da propria sessao
 	}
@@ -18,7 +18,7 @@ public class Sessao {
 		this.idSessao = idSessao;
 	}
 	
-	public int getIdUser() {
+	public String getIdUser() {
 		return idUser;
 	}
 	
@@ -26,7 +26,7 @@ public class Sessao {
 		this.idSessao = hashCode;
 	}
 
-	private void setIdUser(int idUsuario) {
+	private void setIdUser(String idUsuario) {
 		this.idUser = idUsuario;
 	}
 
@@ -34,7 +34,9 @@ public class Sessao {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idUser;
+		result = prime * result
+				+ ((idSessao == null) ? 0 : idSessao.hashCode());
+		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
 		return result;
 	}
 
@@ -50,10 +52,18 @@ public class Sessao {
 			return false;
 		}
 		Sessao other = (Sessao) obj;
-		if (idSessao != other.idSessao) {
+		if (idSessao == null) {
+			if (other.idSessao != null) {
+				return false;
+			}
+		} else if (!idSessao.equals(other.idSessao)) {
 			return false;
 		}
-		if (idUser != other.idUser) {
+		if (idUser == null) {
+			if (other.idUser != null) {
+				return false;
+			}
+		} else if (!idUser.equals(other.idUser)) {
 			return false;
 		}
 		return true;

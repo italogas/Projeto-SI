@@ -4,13 +4,42 @@ public class Solicitacao {
 	private String origem;
 	private String destino;
 	private String pontoEncontro;
-	//private Mensagem mensagem; // composicao preferencialmente a heranca
 	
-	public Solicitacao(int idSessao, int idCarona, String ponto) {
+	private String idDonoDaCarona;
+	private String idDonoDaSolicitacao;
+	
+	private boolean aceita = false;
+	private String idSolicitacao;
+	
+	public Solicitacao(String origem, String destino, String idDonoDaCarona, String idDonoDaSolicitacao, String ponto) {
+		setOrigem(origem); // id da sessao do usuario requerente
+		setDestino(destino);
+		setIdDonoDaCarona(idDonoDaCarona);
+		setIdDonoDaSolicitacao(idDonoDaSolicitacao);
 		//TODO
+		setIdSolicitacao(this.hashCode() + "");
 	}
-			
+
+	private void setIdSolicitacao(String idSolicitacao) {
+		this.idSolicitacao = idSolicitacao;
+	}
+
+	private void setIdDonoDaSolicitacao(String idDonoDaSolicitacao2) {
+		this.idDonoDaSolicitacao = idDonoDaSolicitacao2;
+	}
+
+	private void setIdDonoDaCarona(String idDonoDaCarona2) {
+		this.idDonoDaCarona = idDonoDaCarona2;
+	}
 	
+	public String getIdDonoDaSolicitacao() {
+		return this.idDonoDaSolicitacao;
+	}
+	
+	public String getIdDonoDaCarona() {
+		return this.idDonoDaCarona;
+	}
+
 	public Object getAtributo(String atributo) throws Exception {
 		if(atributo == null || atributo.equals(""))
 			throw new Exception("Atributo inválido");
@@ -52,5 +81,9 @@ public class Solicitacao {
 	public void setPontoEncontro(String pontoEncontro) {
 		//TODO
 		this.pontoEncontro = pontoEncontro;
+	}
+
+	public String getIdSolicitacao() {
+		return this.idSolicitacao;
 	}
 }

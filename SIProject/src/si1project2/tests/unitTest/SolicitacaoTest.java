@@ -12,8 +12,8 @@ public class SolicitacaoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		s1 = new Solicitacao(1, 1, "ponto1");
-		s2 = new Solicitacao(2, 1, "ponto2");
+		//s1 = new Solicitacao(1, 1, "ponto1");
+		//s2 = new Solicitacao(2, 1, "ponto2");
 	}
 
 	@Test
