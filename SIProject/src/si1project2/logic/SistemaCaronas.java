@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import si1project2.util.DateUtil;
+
 
 public class SistemaCaronas {
 	private Map<String, Sessao> mapIdSessao = new TreeMap<String, Sessao>(); // contem apenas sessoes abertas
@@ -55,6 +57,12 @@ public class SistemaCaronas {
 			String data, String hora, String vagas) throws Exception {
 		if(idSessao == null || idSessao.equals(""))
 			throw new Exception("Sessão inválida");
+		if(data == null || data.equals("") || !DateUtil.validaData(data)){
+			throw new Exception("Data inválida");
+		}
+		if(DateUtil.datajapassou(data)){
+			throw new Exception("Data inválida");
+		}
 		
 		if(!mapIdSessao.containsKey(idSessao))
 			throw new Exception("Sessão inexistente");
