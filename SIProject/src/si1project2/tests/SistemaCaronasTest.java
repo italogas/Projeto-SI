@@ -15,7 +15,7 @@ public class SistemaCaronasTest {
 //         files.add("scripts/US02.txt");
 //         files.add("scripts/US03.txt");
          files.add("scripts/US04.txt");
-//         files.add("scripts/US05.txt");
+         files.add("scripts/US05.txt");
          
          //Instantiate your software facade
 	     SistemaCaronas sis1 = new SistemaCaronas();

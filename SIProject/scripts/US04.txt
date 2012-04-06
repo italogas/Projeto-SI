@@ -37,6 +37,7 @@ sessaoBill=abrirSessao login="bill" senha="b1ll"
 sugestaoID=sugerirPontoEncontro idSessao=${sessaoBill} idCarona=${carona4ID} pontos="Acude Velho; Hiper Bompreco"
 encerrarSessao login="bill"
 
+# SUGESTAO == SOLICITACAO
 #Resposta a requisicao
 sessaoMark=abrirSessao login="mark" senha="m@rk"
 responderSugestaoPontoEncontro idSessao=${sessaoMark} idCarona=${carona4ID} idSugestao=${sugestaoID} pontos="Acude Velho;Parque da Crianca"
@@ -78,7 +79,7 @@ respostaID=responderSugestaoPontoEncontro idSessao=${sessaoMark} idCarona=${caro
 encerrarSessao login="mark"
 
 #Requisitar vaga na carona.
-#TENHO QUE TER UMA SESSAO ABERTA PARA REALIZAR OPERACOES NO SISTEMA!!
+#TEM QUE TER UMA SESSAO ABERTA PARA REALIZAR OPERACOES NO SISTEMA!!
 sessaoMark=abrirSessao login="mark" senha="m@rk"
 desistirRequisicao idSessao=${sessaoMark} idCarona=${carona4ID} idSugestao=${sugestaoID}
 encerrarSessao login="mark"

@@ -227,4 +227,38 @@ public class Carona {
 	public String getIdDonoDaCarona() {
 		return null;
 	}
+	
+	/**
+	 * Retorna id da solicitacao adicionada.
+	 * 
+	 * @param idDonoDaCarona2
+	 * @param idDonoDaSolicitacao
+	 * @param ponto : ponto de encontro
+	 * @return id da solicitacao
+	 */
+	public String addSolicitacao(String idDonoDaCarona2,
+			String idDonoDaSolicitacao, String pontos) {
+		Solicitacao s = new Solicitacao(idDonoDaCarona2, idDonoDaSolicitacao, pontos);
+		mapIdSolicitacao.put(s.getIdSolicitacao(), s);
+		return s.getIdSolicitacao();
+	}
+
+	
+	public void mudaEstadoDeSolicitacao(String idSugestao, String pontos) {
+		for(Solicitacao s : mapIdSolicitacao.values()) {
+			if(s.getIdSolicitacao().equals(idSugestao)) {
+				s.setPontoEncontro(pontos);
+				s.setEstadoSolicitacao(EstadoSolicitacao.RESPONDIDA);
+				break;
+			}
+		}
+	}
+
+	public Map<String, Solicitacao> getMapIdSolicitacao() {
+		return this.mapIdSolicitacao;
+	}
+
+	public Object getAtributoSolicitacao(String idSolicitacao, String atributo) throws Exception {
+		return this.mapIdSolicitacao.get(idSolicitacao).getAtributo(atributo);
+	}
 }

@@ -217,10 +217,9 @@ public class Usuario {
 		return mapIdCaronasOferecidas.get(idCarona).getAtributo(nomeAtributo);
 	}
 	
-	public String sugerirPontoEncontro(String origem, String destino, String idDonoDaCarona,
-			String idDonoDaSolicitacao, String ponto) {
-		Solicitacao s = new Solicitacao(origem, destino, idDonoDaCarona, idDonoDaSolicitacao, ponto);
-		return s.getIdSolicitacao();
+	public String sugerirPontoEncontro(String idCarona, String idDonoDaCarona,
+			String idDonoDaSolicitacao, String pontos) {
+		return mapIdCaronasOferecidas.get(idCarona).addSolicitacao(idDonoDaCarona, idDonoDaSolicitacao, pontos);
 	}
 
 	public Map<String, Carona> getMapIdCaronasOferecidas() {
@@ -239,5 +238,26 @@ public class Usuario {
 	public void zerarSistema() {
 		mapIdCaronasOferecidas.clear();
 		mapIdCaronasPegas.clear();
+	}
+	
+	/**
+	 * Muda estado da solicitacao para respondida.
+	 * 
+	 * @param idCarona
+	 * @param idSugestao
+	 * @param pontos
+	 */
+	public void responderSugestaoPontoEncontro(String idCarona,
+			String idSugestao, String pontos) {
+		for(Carona c : mapIdCaronasOferecidas.values()) {
+			if(c.getIdCarona().equals(idCarona)) {
+				c.mudaEstadoDeSolicitacao(idSugestao, pontos);
+			}
+		}
+	}
+
+	public String solicitarVagaPontoEncontro(String idCarona,
+			String idDonoDaCarona, String idDonoDaSolicitacao, String pontos) {
+		return mapIdCaronasOferecidas.get(idCarona).addSolicitacao(idDonoDaCarona, idDonoDaSolicitacao, pontos);
 	}
 }

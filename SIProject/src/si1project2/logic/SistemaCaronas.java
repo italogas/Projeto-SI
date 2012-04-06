@@ -7,9 +7,7 @@ import java.util.TreeMap;
 
 
 public class SistemaCaronas {
-	//private Map<String, Usuario> mapLoginUser = new TreeMap<String, Usuario>();
 	private Map<String, Sessao> mapIdSessao = new TreeMap<String, Sessao>(); // contem apenas sessoes abertas
-	//private Map<String, Carona> mapIdCarona = new TreeMap<String, Carona>();
 	private Map<String, Usuario> mapIdUsuario = new TreeMap<String, Usuario>();
 
 	public void criarUsuario(String login, String senha, String nome,
@@ -186,7 +184,7 @@ public class SistemaCaronas {
 	 * @param login
 	 */
 	public void encerrarSessao(String login) {
-		Iterator<Sessao> it = mapIdSessao.values().iterator(); 
+		Iterator<Sessao> it = mapIdSessao.values().iterator();
 		while(it.hasNext()) {
 			if(mapIdUsuario.get(it.next().getIdUser()).getLogin().equals(login)) {
 				it.remove();
@@ -211,51 +209,121 @@ public class SistemaCaronas {
 		// System.exit(0)?;
 	}
 
-	/*
-	 * Retorna id da Mensagem enviada
+	/**
+	 * 
+	 * @param idSessao: id do usuario q faz a solicitacao/sugestao
+	 * @param idCarona: carona a qual está destinada a solicitacao
+	 * @param pontos : ponto de encontro sugerido
+	 * @return id da solicitacao feita
+	 * @throws Exception
 	 */
-	public String sugerirPontoEncontro(String idSessao, String idCarona, String ponto) throws Exception {
+	public String sugerirPontoEncontro(String idSessao, String idCarona, String pontos) throws Exception {
 		if(idSessao == null || !mapIdSessao.containsKey(idSessao))
 			throw new Exception("Ponto Inválido");
-		//if(idCarona == null || !mapIdCarona.containsKey(idCarona))
-			//throw new Exception("IdCarona inválido");
 		
-		//TODO validar ponto encontro
+		Usuario solicitante = null;
+		for(Sessao s : mapIdSessao.values()) {
+			if(s.getIdSessao().equals(idSessao)) {
+				solicitante = mapIdUsuario.get(s.getIdUser());
+				break;
+			}
+		}
+		if(solicitante == null)
+			throw new Exception("IdSessao Inválido");
 		
-		//for(Usuario u : mapLoginUser.values()) { // u == requerente, solicitante
-			//if(u.getIdUsuario().equals(mapIdSessao.get(idSessao).getIdUser())) {
-				//return u.sugerirPontoEncontro(mapIdCarona.get(idCarona).getOrigem(), mapIdCarona.get(idCarona).getDestino(),
-			//			mapIdUsuario .get(mapIdCarona.get(idCarona).getIdDonoDaCarona()), u.getIdUsuario(), ponto);
-			//}
-		//}
-		return null;
+		Usuario donoDaCarona = null;
+		for(Usuario u : mapIdUsuario.values()) {
+			if(u.getMapIdCaronasOferecidas().containsKey(idCarona)) {
+				donoDaCarona = u;
+				break;
+			}
+		}
+		if(donoDaCarona == null)
+			throw new Exception("IdCarona inválido");
+		
+		return donoDaCarona.sugerirPontoEncontro(idCarona, donoDaCarona.getIdUsuario(), solicitante.getIdUsuario(),
+				pontos);
 	}
 
+	/**
+	 * 
+	 * @param idSessao: id do usuario q responde a solicitacao/sugestao
+	 * @param idCarona: carona a qual está destinada a solicitacao
+	 * @param idSolicitacao: id da solicitacao feita por outro usuario
+	 * @param ponto : ponto de encontro sugerido pelo dono da carona
+	 * @throws Exception
+	 * 
+	 * o ponto encontro da carona eh setado como esse q eh respondido
+	 * pelo dono da carona. O ponto pode ser identico ou nao ao ponto sugerido
+	 * pelo usuario solicitante.
+	 */
 	public void responderSugestaoPontoEncontro(String idSessao, String idCarona,
 			String idSugestao, String pontos) {
-		// TODO
+		for(Sessao s : mapIdSessao.values()) {
+			if(s.getIdSessao().equals(idSessao)) {
+				mapIdUsuario.get(s.getIdUser()).responderSugestaoPontoEncontro(idCarona, idSugestao, pontos);
+			}
+		}
 	}
 
-	/*
-	 * Retorna id da Mensagem enviada
+	/**
+	 * 
+	 * @param idSessao: id do usuario q faz a solicitacao/sugestao
+	 * @param idCarona: carona a qual está destinada a solicitacao
+	 * @param pontos : ponto de encontro sugerido
+	 * @return id da solicitacao feita
+	 * @throws Exception
 	 */
-	public int solicitarVagaPontoEncontro(String idSessao, String idCarona,
-			String ponto) {
-		// TODO
-		return -1;
+	public String solicitarVagaPontoEncontro(String idSessao, String idCarona,
+			String pontos) throws Exception {
+		if(idSessao == null || !mapIdSessao.containsKey(idSessao))
+			throw new Exception("Ponto Inválido");
+		
+		Usuario solicitante = null;
+		for(Sessao s : mapIdSessao.values()) {
+			if(s.getIdSessao().equals(idSessao)) {
+				solicitante = mapIdUsuario.get(s.getIdUser());
+				break;
+			}
+		}
+		if(solicitante == null)
+			throw new Exception("IdSessao Inválido");
+		
+		Usuario donoDaCarona = null;
+		for(Usuario u : mapIdUsuario.values()) {
+			if(u.getMapIdCaronasOferecidas().containsKey(idCarona)) {
+				donoDaCarona = u;
+				break;
+			}
+		}
+		if(donoDaCarona == null)
+			throw new Exception("IdCarona inválido");
+		
+		return donoDaCarona.solicitarVagaPontoEncontro(idCarona, donoDaCarona.getIdUsuario(), solicitante.getIdUsuario(),
+				pontos);
 	}
 
-	public Object getAtributoSolicitacao(String idSolicitacao, String atributo) {
-		//if()
-		//TODO
-		return null;
+	// ESTAH SABENDO DEMAIS ==> VAI DE ENCONTRO AO PATRAO INFORMATION EXPERT
+	public Object getAtributoSolicitacao(String idSolicitacao, String atributo) throws Exception {
+		for(Usuario u : mapIdUsuario.values()) {
+			for(Carona c : u.getMapIdCaronasOferecidas().values()) {
+				if(c.getMapIdSolicitacao().containsKey(idSolicitacao)) {
+					if(atributo.equals("Dono da solicitacao"))
+						return mapIdUsuario.get(c.getAtributoSolicitacao(idSolicitacao, atributo)).getNome();
+					else if(atributo.equals("Dono da carona"))
+						return mapIdUsuario.get(c.getAtributoSolicitacao(idSolicitacao, atributo)).getNome();
+					return c.getAtributoSolicitacao(idSolicitacao, atributo);
+				}
+			}
+		}
+		throw new Exception("Solicitação inexistente");
 	}
 
 	public void aceitarSolicitacaoPontoEncontro(String idSessao, String idSolicitacao) {
 		// TODO
 	}
 
-	public void desistirRequisicao(String idSessao, String idCarona, String idSugestao) {
+	public void desistirRequisicao(String idSessao, String idCarona, String idSolicitacao) {
 		// TODO
 	}
 

@@ -8,16 +8,26 @@ public class Solicitacao {
 	private String idDonoDaCarona;
 	private String idDonoDaSolicitacao;
 	
-	private boolean aceita = false;
+	private EstadoSolicitacao estadoSolicitacao; // respondida==true ou nao respondida==false
 	private String idSolicitacao;
 	
-	public Solicitacao(String origem, String destino, String idDonoDaCarona, String idDonoDaSolicitacao, String ponto) {
+	public Solicitacao(String idDonoDaCarona, String idDonoDaSolicitacao, String ponto) {
 		setOrigem(origem); // id da sessao do usuario requerente
 		setDestino(destino);
 		setIdDonoDaCarona(idDonoDaCarona);
 		setIdDonoDaSolicitacao(idDonoDaSolicitacao);
-		//TODO
+		setPontoEncontro(ponto);
+
 		setIdSolicitacao(this.hashCode() + "");
+		setEstadoSolicitacao(EstadoSolicitacao.NAO_RESPONDIDA);
+	}
+
+	public void setEstadoSolicitacao(EstadoSolicitacao estado) {
+		this.estadoSolicitacao = estado;
+	}
+	
+	public EstadoSolicitacao getEstadoSolicitacao() {
+		return this.estadoSolicitacao;
 	}
 
 	private void setIdSolicitacao(String idSolicitacao) {
@@ -48,12 +58,97 @@ public class Solicitacao {
 			return this.getOrigem();
 		else if(atributo.equals("destino"))
 			return this.getDestino();
-		//else if(atributo.equals("Dono da carona"))
-		//	return this.getDestinatario();
-		//else if(atributo.equals("Dono da solicitacao"))
-		//	return this.getRemetente();
+		else if(atributo.equals("Dono da carona"))
+			return this.getIdDonoDaCarona();
+		else if(atributo.equals("Dono da solicitacao"))
+			return this.getIdDonoDaSolicitacao();
+		else if(atributo.equals("Ponto de Encontro"))
+			return this.getPontoEncontro();
 		else
 			throw new Exception("Atributo inexistente");
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
+		result = prime
+				* result
+				+ ((estadoSolicitacao == null) ? 0 : estadoSolicitacao
+						.hashCode());
+		result = prime * result
+				+ ((idDonoDaCarona == null) ? 0 : idDonoDaCarona.hashCode());
+		result = prime
+				* result
+				+ ((idDonoDaSolicitacao == null) ? 0 : idDonoDaSolicitacao
+						.hashCode());
+		result = prime * result
+				+ ((idSolicitacao == null) ? 0 : idSolicitacao.hashCode());
+		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
+		result = prime * result
+				+ ((pontoEncontro == null) ? 0 : pontoEncontro.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Solicitacao)) {
+			return false;
+		}
+		Solicitacao other = (Solicitacao) obj;
+		if (destino == null) {
+			if (other.destino != null) {
+				return false;
+			}
+		} else if (!destino.equals(other.destino)) {
+			return false;
+		}
+		if (estadoSolicitacao != other.estadoSolicitacao) {
+			return false;
+		}
+		if (idDonoDaCarona == null) {
+			if (other.idDonoDaCarona != null) {
+				return false;
+			}
+		} else if (!idDonoDaCarona.equals(other.idDonoDaCarona)) {
+			return false;
+		}
+		if (idDonoDaSolicitacao == null) {
+			if (other.idDonoDaSolicitacao != null) {
+				return false;
+			}
+		} else if (!idDonoDaSolicitacao.equals(other.idDonoDaSolicitacao)) {
+			return false;
+		}
+		if (idSolicitacao == null) {
+			if (other.idSolicitacao != null) {
+				return false;
+			}
+		} else if (!idSolicitacao.equals(other.idSolicitacao)) {
+			return false;
+		}
+		if (origem == null) {
+			if (other.origem != null) {
+				return false;
+			}
+		} else if (!origem.equals(other.origem)) {
+			return false;
+		}
+		if (pontoEncontro == null) {
+			if (other.pontoEncontro != null) {
+				return false;
+			}
+		} else if (!pontoEncontro.equals(other.pontoEncontro)) {
+			return false;
+		}
+		return true;
 	}
 
 	public String getOrigem() {
