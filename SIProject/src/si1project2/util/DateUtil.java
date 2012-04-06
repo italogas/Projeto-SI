@@ -1,4 +1,4 @@
-package si1project2.logic;
+package si1project2.util;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -18,13 +18,13 @@ public class DateUtil {
 	static final int MAIOR_ANO = Integer.MAX_VALUE,
 			MENOR_ANO = Integer.MIN_VALUE;
 	static GregorianCalendar calendar = new GregorianCalendar();
-
-	public static boolean verificaDataValida(int dia, int mes, int ano)
 	/**
 	 * @param int dia, int mes, int ano
 	 * @return retorna um boolean indicando se o intervalo da data existe
 	 * 
 	 */
+	public static boolean verificaDataValida(int dia, int mes, int ano)
+	
 	{
 		mes--;
 

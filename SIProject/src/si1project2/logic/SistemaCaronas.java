@@ -63,6 +63,7 @@ public class SistemaCaronas {
 		if(DateUtil.datajapassou(data)){
 			throw new Exception("Data inválida");
 		}
+		
 		if(!mapIdSessao.containsKey(idSessao))
 			throw new Exception("Sessão inexistente");
 		

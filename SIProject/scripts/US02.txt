@@ -43,13 +43,17 @@ expect [${carona2ID}] localizarCarona idSessao=${sessaoMark} origem="Rio de Jane
 expect [${carona3ID}] localizarCarona idSessao=${sessaoMark} origem="João Pessoa" destino="Campina Grande"
 
 #Todas as caronas que irão acontecer e que tem como origem João pessoa.
-expect [${carona4ID},${carona3ID}] localizarCarona idSessao=${sessaoMark} origem="João Pessoa" destino=""
+#A CARONA5 DEVERIA ESTAH AQUI JA QUE EH DIFERENTE DAS OUTRAS PARA JOAO PESSOA PELO ANO
+# DAH PROBLEMA COM OS ESPACOS EM BRANCO NO ARRAY
+expect [${carona5ID},${carona3ID},${carona4ID}] localizarCarona idSessao=${sessaoMark} origem="João Pessoa" destino=""
 
 #Todas as caronas que irão acontecer e que tem como destino São Paulo.
 expect [${carona2ID}] localizarCarona idSessao=${sessaoMark} origem="" destino="São Paulo"
 
 #Todas as caronas que irão acontecer.
-expect [${carona2ID},${carona1ID},${carona4ID},${carona3ID}] localizarCarona idSessao=${sessaoMark} origem="" destino=""
+#FALTA A CARONA5
+#DAH PROBLEMA COM OS ESPACOS EM BRANCO NO ARRAY
+expect [${carona1ID},${carona5ID},${carona2ID},${carona3ID},${carona4ID}] localizarCarona idSessao=${sessaoMark} origem="" destino=""
 
 #Cadastro de carona com entradas inválidas, Nenhuma carona aqui deve ser cadastrada.
 expectError "Sessão inválida" cadastrarCarona idSessao= origem="Campina Grande" destino="João Pessoa" data="23/06/2012" hora="16:00" vagas="3"

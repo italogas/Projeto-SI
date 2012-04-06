@@ -1,7 +1,10 @@
 package si1project2.logic;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Carona {
-	private String idSessao;
+	private String idDonoDaCarona;
 	private String idCarona;
 	private String origem;
 	private String destino;
@@ -9,17 +12,18 @@ public class Carona {
 	private String vagas;
 	private String hora;
 	
-	//private List<Mensagem> listaMensagens = new ArrayList<Mensagem>();
+	private Map<String, Solicitacao> mapIdSolicitacao = new TreeMap<String, Solicitacao>();
 
-	public Carona(String idSessao2, String origem2, String destino2,
-			String data2, String hora2, String vagas2) throws Exception {
-			setIdSessao(idSessao2);
-			setOrigem(origem2);
-			setDestino(destino2);
-			setData(data2);
-			setHora(hora2);
-			setVagas(vagas2);
-			setIdCarona(this.hashCode() + "");
+	public Carona(String idDonoDaCarona, String origem2, String destino2,
+		String data2, String hora2, String vagas2) throws Exception {
+		
+		setIdDonaDaCarona(idDonoDaCarona);
+		setOrigem(origem2);
+		setDestino(destino2);
+		setData(data2);
+		setHora(hora2);
+		setVagas(vagas2);
+		setIdCarona(this.hashCode() + "");
 	}
 
 	public String getIdCarona() {
@@ -51,12 +55,8 @@ public class Carona {
 				Character.isDigit(hora2.charAt(4));
 	}
 
-	public String getIdSessao() {
-		return idSessao;
-	}
-
-	public void setIdSessao(String idSessao2) {
-		this.idSessao = idSessao2;
+	public void setIdDonaDaCarona(String idDonoDaCarona) {
+		this.idDonoDaCarona = idDonoDaCarona;
 	}
 
 	public String getOrigem() {
@@ -105,6 +105,11 @@ public class Carona {
 		if(Integer.parseInt(vagas2) <= 0)
 			throw new Exception("Vaga inválida");
 		
+		// NAO TAH FUNCIONANDO DIREITO
+		/*if(data == null || data.equals("") || !DateUtil.validaData(data) || DateUtil.datajapassou(data)){
+			throw new Exception("Data inválida");
+		}*/
+		
 		this.vagas = vagas2;
 	}
 
@@ -122,7 +127,7 @@ public class Carona {
 		result = prime * result
 				+ ((idCarona == null) ? 0 : idCarona.hashCode());
 		result = prime * result
-				+ ((idSessao == null) ? 0 : idSessao.hashCode());
+				+ ((idDonoDaCarona == null) ? 0 : idDonoDaCarona.hashCode());
 		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
 		result = prime * result + ((vagas == null) ? 0 : vagas.hashCode());
 		return result;
@@ -168,11 +173,11 @@ public class Carona {
 		} else if (!idCarona.equals(other.idCarona)) {
 			return false;
 		}
-		if (idSessao == null) {
-			if (other.idSessao != null) {
+		if (idDonoDaCarona == null) {
+			if (other.idDonoDaCarona != null) {
 				return false;
 			}
-		} else if (!idSessao.equals(other.idSessao)) {
+		} else if (!idDonoDaCarona.equals(other.idDonoDaCarona)) {
 			return false;
 		}
 		if (origem == null) {
@@ -217,5 +222,9 @@ public class Carona {
 	
 	public String getCarona() {
 		return this.toString();
+	}
+
+	public String getIdDonoDaCarona() {
+		return null;
 	}
 }
