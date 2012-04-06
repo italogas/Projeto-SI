@@ -65,12 +65,12 @@ public class CaronaTest {
 		
 		try { c1.setVagas("0");
 		} catch(Exception e) {
-			assertEquals(e.getMessage(), "Vagas inválida");
+			assertEquals(e.getMessage(), "Vaga inválida");
 		}
 		
 		try { c1.setVagas("-1");
 		} catch(Exception e) {
-			assertEquals(e.getMessage(), "Vagas inválida");
+			assertEquals(e.getMessage(), "Vaga inválida");
 		}
 		
 	}
@@ -88,7 +88,7 @@ public class CaronaTest {
 		assertEquals(c1.getAtributo("destino"), "destino1");
 		assertEquals(c1.getAtributo("hora"), "05:30");
 		assertEquals(c1.getAtributo("data"), "01/01/2000");
-		assertEquals(c1.getAtributo("vagas"), 4);
+		assertEquals(c1.getAtributo("vagas"), "4");
 	}
 	
 	@Test

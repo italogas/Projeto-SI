@@ -1,11 +1,7 @@
-package si1project2.logic;
+package si1project2.util;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import javax.print.DocFlavor.STRING;
-
-import util.StringUtil;
 
 /**
  * Class ManipulaCalendario
@@ -22,14 +18,12 @@ public class DateUtil {
 	static GregorianCalendar calendar = new GregorianCalendar();
 
 	
-
-	public static boolean verificaDataValida(int dia,int mes,int ano)
 	/**
 	 * @param int dia, int mes, int ano
 	 * @return  retorna um boolean indicando se o intervalo da data existe
 	 * 
 	 */
-	{	
+	public static boolean verificaDataValida(int dia,int mes,int ano) {	
 		mes--;
 
 		if ( (ano < MENOR_ANO) || (ano > MAIOR_ANO)) {
@@ -56,7 +50,7 @@ public class DateUtil {
 		return verificaDataValida(dia, mes, ano);
 	}
 	
-	public static boolean datajapassou(String data) {
+	public static boolean dataJaPassou(String data) {
 		String[] data1 = data.split("/");
 		int dia = Integer.parseInt(data1[0]);
 		int mes = Integer.parseInt(data1[1]);
@@ -73,5 +67,4 @@ public class DateUtil {
 		}
 		return false;
 	}
-
 }
