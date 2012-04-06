@@ -13,8 +13,8 @@ public class Usuario {
 	private String nome;
 	private String endereco;
 
-	private Map<String, Carona> mapIdCaronasPegas = new TreeMap<String, Carona>();
 	private Map<String, Carona> mapIdCaronasOferecidas = new TreeMap<String, Carona>();
+	private List<String> listaIdsCaronasPegas = new LinkedList<String>();
 
 	public Usuario(String login, String senha, String nome, String endereco, String email) throws Exception{
 		setLogin(login);
@@ -218,8 +218,9 @@ public class Usuario {
 	}
 	
 	public String sugerirPontoEncontro(String idCarona, String idDonoDaCarona,
-			String idDonoDaSolicitacao, String pontos) {
-		return mapIdCaronasOferecidas.get(idCarona).addSolicitacao(idDonoDaCarona, idDonoDaSolicitacao, pontos);
+			String idDonoDaSolicitacao, String pontos) throws Exception {
+		Carona c = mapIdCaronasOferecidas.get(idCarona); 
+		return c.addSolicitacao(c.getOrigem(),c.getDestino(), idDonoDaCarona, idDonoDaSolicitacao, pontos);
 	}
 
 	public Map<String, Carona> getMapIdCaronasOferecidas() {
@@ -237,7 +238,7 @@ public class Usuario {
 
 	public void zerarSistema() {
 		mapIdCaronasOferecidas.clear();
-		mapIdCaronasPegas.clear();
+		listaIdsCaronasPegas.clear();
 	}
 	
 	/**
@@ -246,18 +247,48 @@ public class Usuario {
 	 * @param idCarona
 	 * @param idSugestao
 	 * @param pontos
+	 * @throws Exception 
 	 */
 	public void responderSugestaoPontoEncontro(String idCarona,
-			String idSugestao, String pontos) {
+			String idSugestao, String pontos) throws Exception {
 		for(Carona c : mapIdCaronasOferecidas.values()) {
 			if(c.getIdCarona().equals(idCarona)) {
-				c.mudaEstadoDeSolicitacao(idSugestao, pontos);
+				c.setSolicitacaoPontoEncontro(idSugestao, pontos);
 			}
 		}
 	}
 
 	public String solicitarVagaPontoEncontro(String idCarona,
-			String idDonoDaCarona, String idDonoDaSolicitacao, String pontos) {
-		return mapIdCaronasOferecidas.get(idCarona).addSolicitacao(idDonoDaCarona, idDonoDaSolicitacao, pontos);
+			String idDonoDaCarona, String idDonoDaSolicitacao, String pontos) throws Exception {
+		Carona c = mapIdCaronasOferecidas.get(idCarona); 
+		return c.addSolicitacao(c.getOrigem(), c.getDestino(), idDonoDaCarona, idDonoDaSolicitacao, pontos);
+	}
+
+	/**
+	 * Retorna id do dono da solicitacao.
+	 * 
+	 * @param idSolicitacao
+	 * @return
+	 * @throws Exception 
+	 */
+	public String[] aceitarSolicitacaoPontoEncontro(String idSolicitacao) throws Exception {
+		String resp[] = new String[2];
+		for(Carona c : mapIdCaronasOferecidas.values()) {
+			for(Solicitacao solic : c.getMapIdSolicitacao().values()) {
+				if(solic.getIdSolicitacao().equals(idSolicitacao)) {
+					c.setPontoEncontro(solic.getPontoEncontro()); // seta ponto de encontro para carona apos aceitar ponto encontro
+					c.setVagas((Integer.parseInt(c.getVagas())-1)+""); // decrementa o numero de vagas
+					c.removeSolicitacao(idSolicitacao);
+					resp[0] = solic.getIdDonoDaSolicitacao(); 
+					resp[1] = c.getIdCarona();
+					return resp;
+				}
+			}
+		}
+		throw new Exception("Solicitação inexistente");
+	}
+
+	public void adicionarIdCaronaPega(String idCarona) {
+		listaIdsCaronasPegas.add(idCarona);
 	}
 }

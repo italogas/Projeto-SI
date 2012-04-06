@@ -8,10 +8,9 @@ public class Solicitacao {
 	private String idDonoDaCarona;
 	private String idDonoDaSolicitacao;
 	
-	private EstadoSolicitacao estadoSolicitacao; // respondida==true ou nao respondida==false
 	private String idSolicitacao;
 	
-	public Solicitacao(String idDonoDaCarona, String idDonoDaSolicitacao, String ponto) {
+	public Solicitacao(String origem, String destino, String idDonoDaCarona, String idDonoDaSolicitacao, String ponto) {
 		setOrigem(origem); // id da sessao do usuario requerente
 		setDestino(destino);
 		setIdDonoDaCarona(idDonoDaCarona);
@@ -19,15 +18,6 @@ public class Solicitacao {
 		setPontoEncontro(ponto);
 
 		setIdSolicitacao(this.hashCode() + "");
-		setEstadoSolicitacao(EstadoSolicitacao.NAO_RESPONDIDA);
-	}
-
-	public void setEstadoSolicitacao(EstadoSolicitacao estado) {
-		this.estadoSolicitacao = estado;
-	}
-	
-	public EstadoSolicitacao getEstadoSolicitacao() {
-		return this.estadoSolicitacao;
 	}
 
 	private void setIdSolicitacao(String idSolicitacao) {
@@ -73,10 +63,6 @@ public class Solicitacao {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
-		result = prime
-				* result
-				+ ((estadoSolicitacao == null) ? 0 : estadoSolicitacao
-						.hashCode());
 		result = prime * result
 				+ ((idDonoDaCarona == null) ? 0 : idDonoDaCarona.hashCode());
 		result = prime
@@ -108,9 +94,6 @@ public class Solicitacao {
 				return false;
 			}
 		} else if (!destino.equals(other.destino)) {
-			return false;
-		}
-		if (estadoSolicitacao != other.estadoSolicitacao) {
 			return false;
 		}
 		if (idDonoDaCarona == null) {

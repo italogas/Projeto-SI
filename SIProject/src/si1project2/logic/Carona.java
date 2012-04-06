@@ -13,6 +13,7 @@ public class Carona {
 	private String hora;
 	
 	private Map<String, Solicitacao> mapIdSolicitacao = new TreeMap<String, Solicitacao>();
+	private String pontoEncontro;
 
 	public Carona(String idDonoDaCarona, String origem2, String destino2,
 		String data2, String hora2, String vagas2) throws Exception {
@@ -216,10 +217,20 @@ public class Carona {
 			return this.getHora();
 		else if(nomeAtributo.equals("vagas"))
 			return this.getVagas();
+		else if(nomeAtributo.equals("Ponto de Encontro"))
+			return this.getPontoEncontro();
 		else
 			throw new Exception("Atributo inexistente");
 	}
 	
+	public String getPontoEncontro() {
+		return this.pontoEncontro;
+	}
+	
+	public void setPontoEncontro(String ponto) {
+		this.pontoEncontro = ponto;
+	}
+
 	public String getCarona() {
 		return this.toString();
 	}
@@ -235,23 +246,17 @@ public class Carona {
 	 * @param idDonoDaSolicitacao
 	 * @param ponto : ponto de encontro
 	 * @return id da solicitacao
+	 * @throws Exception 
 	 */
-	public String addSolicitacao(String idDonoDaCarona2,
-			String idDonoDaSolicitacao, String pontos) {
-		Solicitacao s = new Solicitacao(idDonoDaCarona2, idDonoDaSolicitacao, pontos);
+	public String addSolicitacao(String origem, String destino, String idDonoDaCarona2,
+			String idDonoDaSolicitacao, String pontos) throws Exception {
+		if(pontos == null)
+			throw new Exception("Ponto Inválido");
+		if(pontos.equals("") || pontos.equals(pontoEncontro))
+			throw new Exception("Ponto Inválido");
+		Solicitacao s = new Solicitacao(origem, destino, idDonoDaCarona2, idDonoDaSolicitacao, pontos);
 		mapIdSolicitacao.put(s.getIdSolicitacao(), s);
 		return s.getIdSolicitacao();
-	}
-
-	
-	public void mudaEstadoDeSolicitacao(String idSugestao, String pontos) {
-		for(Solicitacao s : mapIdSolicitacao.values()) {
-			if(s.getIdSolicitacao().equals(idSugestao)) {
-				s.setPontoEncontro(pontos);
-				s.setEstadoSolicitacao(EstadoSolicitacao.RESPONDIDA);
-				break;
-			}
-		}
 	}
 
 	public Map<String, Solicitacao> getMapIdSolicitacao() {
@@ -260,5 +265,28 @@ public class Carona {
 
 	public Object getAtributoSolicitacao(String idSolicitacao, String atributo) throws Exception {
 		return this.mapIdSolicitacao.get(idSolicitacao).getAtributo(atributo);
+	}
+
+	public void removeSolicitacao(String idSolicitacao) {
+		for(Solicitacao s : mapIdSolicitacao.values()) {
+			if(s.getIdSolicitacao().equals(idSolicitacao)) {
+				mapIdSolicitacao.remove(idSolicitacao);
+				break;
+			}
+		}
+	}
+
+	public void setSolicitacaoPontoEncontro(String idSugestao, String pontos) throws Exception {
+		if(pontos == null)
+			throw new Exception("Ponto Inválido");
+		if(pontos.equals(""))
+			throw new Exception("Ponto Inválido");
+		
+		for(Solicitacao s : mapIdSolicitacao.values()) {
+			if(s.getIdSolicitacao().equals(idSugestao)) {
+				s.setPontoEncontro(pontos);
+				break;
+			}
+		}
 	}
 }
