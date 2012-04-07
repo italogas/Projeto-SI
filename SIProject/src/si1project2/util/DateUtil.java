@@ -81,7 +81,7 @@ public class DateUtil {
 		return false;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String data = "25/12/2011";
 		try {
 			System.out.println(data);
@@ -96,7 +96,5 @@ public class DateUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}
-
+	}*/
 }

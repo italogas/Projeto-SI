@@ -13,9 +13,9 @@ criarUsuario login="mark" senha="m@rk" nome="Mark Zuckerberg" endereco="Palo Alt
 sessaoMark=abrirSessao login="mark" senha="m@rk"
 
 #Localizar carona, sem carona cadastrada.
-expect [] localizarCarona idSessao=${sessaoMark} origem="Campina Grande" destino="João Pessoa"
-expect [] localizarCarona idSessao=${sessaoMark} origem="São Francisco" destino="Palo Alto"
-expect [] localizarCarona idSessao=${sessaoMark} origem="Rio de Janeiro" destino="São Paulo"
+expect {} localizarCarona idSessao=${sessaoMark} origem="Campina Grande" destino="João Pessoa"
+expect {} localizarCarona idSessao=${sessaoMark} origem="São Francisco" destino="Palo Alto"
+expect {} localizarCarona idSessao=${sessaoMark} origem="Rio de Janeiro" destino="São Paulo"
 
 #o método cadastrar carona retorna id
 sessaoMark=abrirSessao login="mark" senha="m@rk"
@@ -26,7 +26,7 @@ expect "Campina Grande - João Pessoa" getTrajeto idCarona=${carona1ID}
 
 carona2ID=cadastrarCarona idSessao=${sessaoMark} origem="Rio de Janeiro" destino="São Paulo" data="31/05/2012" hora="08:00" vagas="2"
 expect "31/05/2012" getAtributoCarona idCarona=${carona2ID} atributo="data"
-expect 2 getAtributoCarona idCarona=${carona2ID} atributo="vagas"
+expect "2" getAtributoCarona idCarona=${carona2ID} atributo="vagas"
 
 carona3ID=cadastrarCarona idSessao=${sessaoMark} origem="João Pessoa" destino="Campina Grande" data="25/11/2026" hora="06:59" vagas="4"
 expect "João Pessoa para Campina Grande, no dia 25/11/2026, as 06:59" getCarona idCarona=${carona3ID}
@@ -38,22 +38,22 @@ carona5ID=cadastrarCarona idSessao=${sessaoMark} origem="João Pessoa" destino="
 expect "João Pessoa para Lagoa Seca, no dia 25/11/2006, as 05:00" getCarona idCarona=${carona5ID}
 
 #Localizar carona.
-expect [] localizarCarona idSessao=${sessaoMark} origem="São Francisco" destino="Palo Alto"
-expect [${carona2ID}] localizarCarona idSessao=${sessaoMark} origem="Rio de Janeiro" destino="São Paulo"
-expect [${carona3ID}] localizarCarona idSessao=${sessaoMark} origem="João Pessoa" destino="Campina Grande"
+expect {} localizarCarona idSessao=${sessaoMark} origem="São Francisco" destino="Palo Alto"
+expect {${carona2ID}} localizarCarona idSessao=${sessaoMark} origem="Rio de Janeiro" destino="São Paulo"
+expect {${carona3ID}} localizarCarona idSessao=${sessaoMark} origem="João Pessoa" destino="Campina Grande"
 
 #Todas as caronas que irão acontecer e que tem como origem João pessoa.
 #A CARONA5 DEVERIA ESTAH AQUI JA QUE EH DIFERENTE DAS OUTRAS PARA JOAO PESSOA PELO ANO
 # DAH PROBLEMA COM OS ESPACOS EM BRANCO NO ARRAY
-expect [${carona5ID},${carona3ID},${carona4ID}] localizarCarona idSessao=${sessaoMark} origem="João Pessoa" destino=""
+expect {${carona5ID},${carona3ID},${carona4ID}} localizarCarona idSessao=${sessaoMark} origem="João Pessoa" destino=""
 
 #Todas as caronas que irão acontecer e que tem como destino São Paulo.
-expect [${carona2ID}] localizarCarona idSessao=${sessaoMark} origem="" destino="São Paulo"
+expect {${carona2ID}} localizarCarona idSessao=${sessaoMark} origem="" destino="São Paulo"
 
 #Todas as caronas que irão acontecer.
 #FALTA A CARONA5
 #DAH PROBLEMA COM OS ESPACOS EM BRANCO NO ARRAY
-expect [${carona1ID},${carona5ID},${carona2ID},${carona3ID},${carona4ID}] localizarCarona idSessao=${sessaoMark} origem="" destino=""
+expect {${carona1ID},${carona5ID},${carona2ID},${carona3ID},${carona4ID}} localizarCarona idSessao=${sessaoMark} origem="" destino=""
 
 #Cadastro de carona com entradas inválidas, Nenhuma carona aqui deve ser cadastrada.
 expectError "Sessão inválida" cadastrarCarona idSessao= origem="Campina Grande" destino="João Pessoa" data="23/06/2012" hora="16:00" vagas="3"
@@ -103,5 +103,6 @@ expectError "Destino inválido" localizarCarona idSessao=${sessaoMark} origem="C
 expectError "Destino inválido" localizarCarona idSessao=${sessaoMark} origem="Campina Grande" destino="()"
 expectError "Destino inválido" localizarCarona idSessao=${sessaoMark} origem="Campina Grande" destino="!?"
 
-encerrarSistema
-quit
+#SE ENCERRAR SISTEMA AQUI, O PROGRAMA EH TERMINADO E OS DEMAIS TESTES NAO SAO EXECUTADOS
+#encerrarSistema
+#quit
