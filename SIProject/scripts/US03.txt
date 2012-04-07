@@ -33,11 +33,9 @@ expect [${carona3ID},${carona4ID},${carona5ID}] localizarCarona idSessao=${sessa
 
 
 #Testa possiveis erros no sistema.
-expectError "Origem inválida" localizarCarona idSessao=${sessaoMark} origem="" destino="João Pessoa"
 expectError "Origem inválida" localizarCarona idSessao=${sessaoMark} origem="()" destino="João Pessoa"
 expectError "Origem inválida" localizarCarona idSessao=${sessaoMark} origem="!" destino="João Pessoa"
 expectError "Origem inválida" localizarCarona idSessao=${sessaoMark} origem="!?" destino="João Pessoa"
-expectError "Destino inválido" localizarCarona idSessao=${sessaoMark} origem="Campina Grande" destino=""
 expectError "Destino inválido" localizarCarona idSessao=${sessaoMark} origem="Campina Grande" destino="()"
 expectError "Destino inválido" localizarCarona idSessao=${sessaoMark} origem="Campina Grande" destino="!?"
 

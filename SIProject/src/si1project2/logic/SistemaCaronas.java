@@ -60,9 +60,15 @@ public class SistemaCaronas {
 			throw new Exception("Data inválida");
 		}
 		if(DateUtil.datajapassou(data)){
+//			XXX CONSERTAR E DESCOBRIR QUAL O PROBLEMA COM ESSE IF
 			throw new Exception("Data inválida");
 		}
-		
+		if(hora == null || hora.equals("") || !hora.contains(":")){
+			throw new Exception("Hora inválida");
+		}
+		if(vagas==null || !vagas.toUpperCase().equals(vagas)){
+			throw new Exception("Vaga inválida");
+		}
 		if(!mapIdSessao.containsKey(idSessao))
 			throw new Exception("Sessão inexistente");
 		
@@ -123,15 +129,14 @@ public class SistemaCaronas {
 		
 		if(idSessao == null)
 			throw new Exception("IdSessao nulo");
-		if(origem == null)
+		if(origem == null  ||(!origem.equals("") && origem.toUpperCase().equals(origem)))
 			throw new Exception("Origem inválida");
-		if(destino == null)
+		if(destino == null || (!destino.equals("") && destino.toUpperCase().equals(destino)))
 			throw new Exception("Destino inválido");
 		
 		Usuario user = mapIdUsuario.get(mapIdSessao.get(idSessao).getIdUser());
 		return user.localizarCarona(origem, destino);
 	}
-
 	public Object getAtributoCarona(String idCarona, String nomeAtributo)
 			throws Exception {
 		if(idCarona == null || idCarona.equals(""))
