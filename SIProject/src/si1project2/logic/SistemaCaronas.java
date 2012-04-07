@@ -7,7 +7,6 @@ import java.util.TreeMap;
 
 import si1project2.util.DateUtil;
 
-
 public class SistemaCaronas {
 	private Map<String, Sessao> mapIdSessao = new TreeMap<String, Sessao>(); // contem apenas sessoes abertas
 	private Map<String, Usuario> mapIdUsuario = new TreeMap<String, Usuario>();
@@ -266,7 +265,16 @@ public class SistemaCaronas {
 	 * pelo usuario solicitante.
 	 */
 	public void responderSugestaoPontoEncontro(String idSessao, String idCarona,
-			String idSugestao, String pontos) {
+			String idSugestao, String pontos) throws Exception {
+		if(idSessao == null)
+			throw new Exception("IdSessao inválido");
+		if(idCarona == null)
+			throw new Exception("IdCarona inválido");
+		if(idSugestao == null)
+			throw new Exception("IdSessao inválido");
+		if(pontos == null || pontos.equals(""))
+			throw new Exception("Ponto Inválido");
+			
 		for(Sessao s : mapIdSessao.values()) {
 			if(s.getIdSessao().equals(idSessao)) {
 				mapIdUsuario.get(s.getIdUser()).responderSugestaoPontoEncontro(idCarona, idSugestao, pontos);
@@ -311,7 +319,7 @@ public class SistemaCaronas {
 				pontos);
 	}
 
-	// ESTAH SABENDO DEMAIS ==> VAI DE ENCONTRO AO PATRAO INFORMATION EXPERT
+	// ESTAH SABENDO DEMAIS ==> VAI DE ENCONTRO AO PADRAO INFORMATION-EXPERT
 	public Object getAtributoSolicitacao(String idSolicitacao, String atributo) throws Exception {
 		for(Usuario u : mapIdUsuario.values()) {
 			for(Carona c : u.getMapIdCaronasOferecidas().values()) {
@@ -327,8 +335,40 @@ public class SistemaCaronas {
 		throw new Exception("Solicitação inexistente");
 	}
 
-	public void aceitarSolicitacaoPontoEncontro(String idSessao, String idSolicitacao) {
-		// TODO
+	/**
+	 * 
+	 * 
+	 * @param idSessao : id da sessao do usuario dono da carona
+	 * @param idSolicitacao
+	 * @throws Exception 
+	 */
+	public void aceitarSolicitacaoPontoEncontro(String idSessao, String idSolicitacao) throws Exception {
+		if(idSolicitacao == null)
+			throw new Exception("Solicitação inexistente");
+		
+		Usuario donoDaCarona = mapIdUsuario.get(mapIdSessao.get(idSessao).getIdUser());
+		String[] resp = donoDaCarona.aceitarSolicitacaoPontoEncontro(idSolicitacao);
+		String idDonoDaSolicitacao = resp[0];
+		String idCarona = resp[1];
+		mapIdUsuario.get(idDonoDaSolicitacao).adicionarIdCaronaPega(idCarona);
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @param idSessao
+	 * @param idSolicitacao
+	 * @throws Exception 
+	 */
+	public void aceitarSolicitacao( String idSessao, String idSolicitacao) throws Exception {
+		if(idSessao == null || idSolicitacao == null)
+			throw new Exception("Solicitação inexistente");
+		
+		Usuario donoDaCarona = mapIdUsuario.get(mapIdSessao.get(idSessao).getIdUser());
+		String[] resp = donoDaCarona.aceitarSolicitacao(idSolicitacao);
+		String idDonoDaSolicitacao = resp[0];
+		String idCarona = resp[1];
+		mapIdUsuario.get(idDonoDaSolicitacao).adicionarIdCaronaPega(idCarona);
 	}
 
 	public void desistirRequisicao(String idSessao, String idCarona, String idSolicitacao) {
@@ -341,10 +381,6 @@ public class SistemaCaronas {
 	}
 
 	public void rejeitarSolicitacao(String idSessao, String idSolicitacao) {
-		// TODO
-	}
-
-	public void aceitarSolicitacao(String idSessao, String idSolicitacao) {
 		// TODO
 	}
 }

@@ -251,6 +251,8 @@ public class Usuario {
 	 */
 	public void responderSugestaoPontoEncontro(String idCarona,
 			String idSugestao, String pontos) throws Exception {
+		if(pontos.equals(""))
+			throw new Exception("Ponto Inválido");
 		for(Carona c : mapIdCaronasOferecidas.values()) {
 			if(c.getIdCarona().equals(idCarona)) {
 				c.setSolicitacaoPontoEncontro(idSugestao, pontos);
@@ -290,5 +292,23 @@ public class Usuario {
 
 	public void adicionarIdCaronaPega(String idCarona) {
 		listaIdsCaronasPegas.add(idCarona);
+	}
+
+	// ESTRANHO: FAZ A MESMA COISA QUE aceitarSolicitacaoPontoEncontro(...) !!!
+	public String[] aceitarSolicitacao(String idSolicitacao) throws Exception {
+		String resp[] = new String[2];
+		for(Carona c : mapIdCaronasOferecidas.values()) {
+			for(Solicitacao solic : c.getMapIdSolicitacao().values()) {
+				if(solic.getIdSolicitacao().equals(idSolicitacao)) {
+					c.setPontoEncontro(solic.getPontoEncontro()); // seta ponto de encontro para carona apos aceitar ponto encontro
+					c.setVagas((Integer.parseInt(c.getVagas())-1)+""); // decrementa o numero de vagas
+					c.removeSolicitacao(idSolicitacao);
+					resp[0] = solic.getIdDonoDaSolicitacao(); 
+					resp[1] = c.getIdCarona();
+					return resp;
+				}
+			}
+		}
+		throw new Exception("Solicitação inexistente");
 	}
 }
