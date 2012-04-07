@@ -1,23 +1,46 @@
 package si1project2.logic;
 
 public class Solicitacao {
-	private String origem;
-	private String destino;
-	private String pontoEncontro;
+	private String origemCaronaSolicitacao;
+	private String destinoCaronaSolicitacao;
+	private String pontoEncontroCaronaSolicitacao;
 	
-	private String idDonoDaCarona;
+	private String idDonoDaCaronaSolicitacao;
 	private String idDonoDaSolicitacao;
 	
 	private String idSolicitacao;
 	
 	public Solicitacao(String origem, String destino, String idDonoDaCarona, String idDonoDaSolicitacao, String ponto) {
-		setOrigem(origem); // id da sessao do usuario requerente
-		setDestino(destino);
+		setOrigemCaronaSolicitacao(origem); // id da sessao do usuario requerente
+		setDestinoCaronaSolicitacao(destino);
 		setIdDonoDaCarona(idDonoDaCarona);
 		setIdDonoDaSolicitacao(idDonoDaSolicitacao);
-		setPontoEncontro(ponto);
+		setPontoEncontroCaronaSolicitacao(ponto);
 
 		setIdSolicitacao(this.hashCode() + "");
+	}
+
+	// NOTE: pontoEncontroCaronaSolicitacao = null
+	public Solicitacao(String origem2, String destino2, String idDonoDaCarona2,
+			String idDonoDaSolicitacao2) { 
+		setOrigemCaronaSolicitacao(origem2); // id da sessao do usuario requerente
+		setDestinoCaronaSolicitacao(destino2);
+		setIdDonoDaCarona(idDonoDaCarona2);
+		setIdDonoDaSolicitacao(idDonoDaSolicitacao2);
+
+		setIdSolicitacao(this.hashCode() + "");
+	}
+
+	@Override
+	public String toString() {
+		return "Solicitacao [origemCaronaSolicitacao="
+				+ origemCaronaSolicitacao + ", destinoCaronaSolicitacao="
+				+ destinoCaronaSolicitacao
+				+ ", pontoEncontroCaronaSolicitacao="
+				+ pontoEncontroCaronaSolicitacao
+				+ ", idDonoDaCaronaSolicitacao=" + idDonoDaCaronaSolicitacao
+				+ ", idDonoDaSolicitacao=" + idDonoDaSolicitacao
+				+ ", idSolicitacao=" + idSolicitacao + "]";
 	}
 
 	private void setIdSolicitacao(String idSolicitacao) {
@@ -29,7 +52,7 @@ public class Solicitacao {
 	}
 
 	private void setIdDonoDaCarona(String idDonoDaCarona2) {
-		this.idDonoDaCarona = idDonoDaCarona2;
+		this.idDonoDaCaronaSolicitacao = idDonoDaCarona2;
 	}
 	
 	public String getIdDonoDaSolicitacao() {
@@ -37,7 +60,7 @@ public class Solicitacao {
 	}
 	
 	public String getIdDonoDaCarona() {
-		return this.idDonoDaCarona;
+		return this.idDonoDaCaronaSolicitacao;
 	}
 
 	public Object getAtributo(String atributo) throws Exception {
@@ -62,18 +85,18 @@ public class Solicitacao {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
+		result = prime * result + ((destinoCaronaSolicitacao == null) ? 0 : destinoCaronaSolicitacao.hashCode());
 		result = prime * result
-				+ ((idDonoDaCarona == null) ? 0 : idDonoDaCarona.hashCode());
+				+ ((idDonoDaCaronaSolicitacao == null) ? 0 : idDonoDaCaronaSolicitacao.hashCode());
 		result = prime
 				* result
 				+ ((idDonoDaSolicitacao == null) ? 0 : idDonoDaSolicitacao
 						.hashCode());
 		result = prime * result
 				+ ((idSolicitacao == null) ? 0 : idSolicitacao.hashCode());
-		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
+		result = prime * result + ((origemCaronaSolicitacao == null) ? 0 : origemCaronaSolicitacao.hashCode());
 		result = prime * result
-				+ ((pontoEncontro == null) ? 0 : pontoEncontro.hashCode());
+				+ ((pontoEncontroCaronaSolicitacao == null) ? 0 : pontoEncontroCaronaSolicitacao.hashCode());
 		return result;
 	}
 
@@ -89,18 +112,18 @@ public class Solicitacao {
 			return false;
 		}
 		Solicitacao other = (Solicitacao) obj;
-		if (destino == null) {
-			if (other.destino != null) {
+		if (destinoCaronaSolicitacao == null) {
+			if (other.destinoCaronaSolicitacao != null) {
 				return false;
 			}
-		} else if (!destino.equals(other.destino)) {
+		} else if (!destinoCaronaSolicitacao.equals(other.destinoCaronaSolicitacao)) {
 			return false;
 		}
-		if (idDonoDaCarona == null) {
-			if (other.idDonoDaCarona != null) {
+		if (idDonoDaCaronaSolicitacao == null) {
+			if (other.idDonoDaCaronaSolicitacao != null) {
 				return false;
 			}
-		} else if (!idDonoDaCarona.equals(other.idDonoDaCarona)) {
+		} else if (!idDonoDaCaronaSolicitacao.equals(other.idDonoDaCaronaSolicitacao)) {
 			return false;
 		}
 		if (idDonoDaSolicitacao == null) {
@@ -117,48 +140,48 @@ public class Solicitacao {
 		} else if (!idSolicitacao.equals(other.idSolicitacao)) {
 			return false;
 		}
-		if (origem == null) {
-			if (other.origem != null) {
+		if (origemCaronaSolicitacao == null) {
+			if (other.origemCaronaSolicitacao != null) {
 				return false;
 			}
-		} else if (!origem.equals(other.origem)) {
+		} else if (!origemCaronaSolicitacao.equals(other.origemCaronaSolicitacao)) {
 			return false;
 		}
-		if (pontoEncontro == null) {
-			if (other.pontoEncontro != null) {
+		if (pontoEncontroCaronaSolicitacao == null) {
+			if (other.pontoEncontroCaronaSolicitacao != null) {
 				return false;
 			}
-		} else if (!pontoEncontro.equals(other.pontoEncontro)) {
+		} else if (!pontoEncontroCaronaSolicitacao.equals(other.pontoEncontroCaronaSolicitacao)) {
 			return false;
 		}
 		return true;
 	}
 
 	public String getOrigem() {
-		return origem;
+		return origemCaronaSolicitacao;
 	}
 
-	public void setOrigem(String origem) {
+	public void setOrigemCaronaSolicitacao(String origem) {
 		//TODO
-		this.origem = origem;
+		this.origemCaronaSolicitacao = origem;
 	}
 
 	public String getDestino() {
-		return destino;
+		return destinoCaronaSolicitacao;
 	}
 
-	public void setDestino(String destino) {
+	public void setDestinoCaronaSolicitacao(String destino) {
 		//TODO
-		this.destino = destino;
+		this.destinoCaronaSolicitacao = destino;
 	}
 
 	public String getPontoEncontro() {
-		return pontoEncontro;
+		return pontoEncontroCaronaSolicitacao;
 	}
 
-	public void setPontoEncontro(String pontoEncontro) {
+	public void setPontoEncontroCaronaSolicitacao(String pontoEncontro) {
 		//TODO
-		this.pontoEncontro = pontoEncontro;
+		this.pontoEncontroCaronaSolicitacao = pontoEncontro;
 	}
 
 	public String getIdSolicitacao() {

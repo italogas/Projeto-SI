@@ -284,9 +284,27 @@ public class Carona {
 		
 		for(Solicitacao s : mapIdSolicitacao.values()) {
 			if(s.getIdSolicitacao().equals(idSugestao)) {
-				s.setPontoEncontro(pontos);
+				s.setPontoEncontroCaronaSolicitacao(pontos);
 				break;
 			}
 		}
+	}
+
+	public String addSolicitacao(String origem2, String destino2,
+			String idDonoDaCarona2, String idDonoDaSolicitacao) {
+		Solicitacao s = new Solicitacao(origem2, destino2, idDonoDaCarona2, idDonoDaSolicitacao);
+		mapIdSolicitacao.put(s.getIdSolicitacao(), s);
+		return s.getIdSolicitacao();
+	}
+	
+	/**
+	 * Rejeita solicitacao, removendo-a
+	 * das solicitacoes associada a esta
+	 * carona.
+	 * 
+	 * @param idSolicitacao
+	 */
+	public void rejeitarSolicitacao(String idSolicitacao) {
+		mapIdSolicitacao.remove(idSolicitacao);
 	}
 }

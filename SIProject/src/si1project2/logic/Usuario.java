@@ -294,13 +294,13 @@ public class Usuario {
 		listaIdsCaronasPegas.add(idCarona);
 	}
 
-	// ESTRANHO: FAZ A MESMA COISA QUE aceitarSolicitacaoPontoEncontro(...) !!!
+	// ESTRANHO: FAZ QUASE A MESMA COISA QUE aceitarSolicitacaoPontoEncontro(...) !!!
 	public String[] aceitarSolicitacao(String idSolicitacao) throws Exception {
 		String resp[] = new String[2];
 		for(Carona c : mapIdCaronasOferecidas.values()) {
 			for(Solicitacao solic : c.getMapIdSolicitacao().values()) {
 				if(solic.getIdSolicitacao().equals(idSolicitacao)) {
-					c.setPontoEncontro(solic.getPontoEncontro()); // seta ponto de encontro para carona apos aceitar ponto encontro
+					// nao seta pontoEncontro da carona ==> fica null
 					c.setVagas((Integer.parseInt(c.getVagas())-1)+""); // decrementa o numero de vagas
 					c.removeSolicitacao(idSolicitacao);
 					resp[0] = solic.getIdDonoDaSolicitacao(); 
@@ -310,5 +310,34 @@ public class Usuario {
 			}
 		}
 		throw new Exception("Solicitação inexistente");
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", nome=" + nome + "]";
+	}
+
+	public String solicitarVaga(String idCarona, String idDonoDaCarona, String idDonoDaSolicitacao) {
+		Carona c = mapIdCaronasOferecidas.get(idCarona); 
+		return c.addSolicitacao(c.getOrigem(), c.getDestino(), idDonoDaCarona, idDonoDaSolicitacao);
+	}
+
+	public void rejeitarSolicitacao(String idSolicitacao) throws Exception {
+		boolean flag = false;
+		for(Carona c : mapIdCaronasOferecidas.values()) {
+			for(Solicitacao s : c.getMapIdSolicitacao().values()) {
+				if(s.getIdSolicitacao().equals(idSolicitacao)) {
+					c.rejeitarSolicitacao(idSolicitacao);
+					flag = flag ? true : true;
+				}
+			}
+		}
+		if(!flag)
+			throw new Exception("Solicitação inexistente");
+	}
+
+	public void removerSolicitacao(String idCarona, String idSolicitacao) {
+		Carona c = mapIdCaronasOferecidas.get(idCarona); // O(logn)
+		c.removeSolicitacao(idSolicitacao);
 	}
 }

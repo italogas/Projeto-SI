@@ -296,7 +296,7 @@ public class SistemaCaronas {
 			throw new Exception("Ponto Inválido");
 		
 		Usuario solicitante = null;
-		for(Sessao s : mapIdSessao.values()) {
+		for(Sessao s : mapIdSessao.values()) { // procura pelo usuario solicitante
 			if(s.getIdSessao().equals(idSessao)) {
 				solicitante = mapIdUsuario.get(s.getIdUser());
 				break;
@@ -306,7 +306,7 @@ public class SistemaCaronas {
 			throw new Exception("IdSessao Inválido");
 		
 		Usuario donoDaCarona = null;
-		for(Usuario u : mapIdUsuario.values()) {
+		for(Usuario u : mapIdUsuario.values()) { // procura pelo donoDaCarona
 			if(u.getMapIdCaronasOferecidas().containsKey(idCarona)) {
 				donoDaCarona = u;
 				break;
@@ -354,9 +354,9 @@ public class SistemaCaronas {
 	}
 	
 	/**
+	 * Aceita solicitacao
 	 * 
-	 * 
-	 * @param idSessao
+	 * @param idSessao : id da sessao do usuario dono da carona
 	 * @param idSolicitacao
 	 * @throws Exception 
 	 */
@@ -371,16 +371,85 @@ public class SistemaCaronas {
 		mapIdUsuario.get(idDonoDaSolicitacao).adicionarIdCaronaPega(idCarona);
 	}
 
-	public void desistirRequisicao(String idSessao, String idCarona, String idSolicitacao) {
-		// TODO
+	/**
+	 * Adiciona solicitacao a lista de solicitacoes
+	 * associadas a uma carona, indicada por idCarona.
+	 * A solicitacao eh feita pelo usuario indicado
+	 * por idSessao.
+	 * 
+	 * @param idSessao
+	 * @param idCarona
+	 * @return id da solicitacao feita
+	 * @throws Exception
+	 */
+	public String solicitarVaga(String idSessao, String idCarona) throws Exception {
+		if(idSessao == null || !mapIdSessao.containsKey(idSessao))
+			throw new Exception("IdSessao inválido");
+		
+		Usuario solicitante = null;
+		for(Sessao s : mapIdSessao.values()) { // procura pelo usuario solicitante dentre os usuarios
+			if(s.getIdSessao().equals(idSessao)) {
+				solicitante = mapIdUsuario.get(s.getIdUser());
+				break;
+			}
+		}
+		if(solicitante == null)
+			throw new Exception("IdSessao Inválido");
+		
+		Usuario donoDaCarona = null;
+		for(Usuario u : mapIdUsuario.values()) { // procura pelo donoDaCarona
+			if(u.getMapIdCaronasOferecidas().containsKey(idCarona)) {
+				donoDaCarona = u;
+				break;
+			}
+		}
+		if(donoDaCarona == null)
+			throw new Exception("IdCarona inválido");
+		
+		return donoDaCarona.solicitarVaga(idCarona, donoDaCarona.getIdUsuario(), solicitante.getIdUsuario());
 	}
 
-	public int solicitarVaga(String idSessao, String idCarona) {
-		// TODO
-		return -1;
+	/**
+	 * Usuario dono da carona, indicado por idSessao, rejeita solicitacao,
+	 * indicada por idSolicitacao.
+	 * 
+	 * @param idSessao
+	 * @param idSolicitacao
+	 * @throws Exception 
+	 */
+	public void rejeitarSolicitacao(String idSessao, String idSolicitacao) throws Exception {
+		if(idSessao == null)
+			throw new Exception("IdSessao inválido");
+		if(idSolicitacao == null)
+			throw new Exception("IdSolicitacao inválida");
+		
+		for(Sessao s : mapIdSessao.values()) { // procura pelo donoDaCarona
+			if(s.getIdSessao().equals(idSessao)) {
+				Usuario donoDaCarona = mapIdUsuario.get(s.getIdUser()); 
+				donoDaCarona.rejeitarSolicitacao(idSolicitacao);
+			}
+		}
 	}
-
-	public void rejeitarSolicitacao(String idSessao, String idSolicitacao) {
-		// TODO
+	
+	/**
+	 * Remove a solicitacao, indicada por idSolicitacao, da lista de
+	 * solicitacoes da carona indicada por idCarona, feita ao usuario
+	 * indicado por idSessao.
+	 * 
+	 * @param idSessao
+	 * @param idCarona
+	 * @param idSolicitacao
+	 * @throws Exception 
+	 */
+	public void desistirRequisicao(String idSessao, String idCarona, String idSolicitacao) throws Exception {
+		if(idSessao == null)
+			throw new Exception("IdSessao inválido");
+		if(idCarona == null)
+			throw new Exception("IdCarona inválido");
+		if(idSolicitacao == null)
+			throw new Exception("IdSolicitacao inválido");
+		
+		Usuario donoDaCarona = mapIdUsuario.get(mapIdSessao.get(idSessao).getIdUser()); // O(2*logn)
+		donoDaCarona.removerSolicitacao(idCarona, idSolicitacao);
 	}
 }
