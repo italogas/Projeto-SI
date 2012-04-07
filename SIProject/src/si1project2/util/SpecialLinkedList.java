@@ -3,6 +3,9 @@ package si1project2.util;
 import java.util.LinkedList;
 
 public class SpecialLinkedList<T> extends LinkedList<T> {
+
+	private static final long serialVersionUID = 2333194496228525598L;
+
 	@Override
 	public String toString() {
 		String result = "{";
