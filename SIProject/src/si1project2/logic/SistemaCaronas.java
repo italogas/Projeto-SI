@@ -214,11 +214,10 @@ public class SistemaCaronas {
 		mapIdSessao.clear();
 		for(Usuario u : mapIdUsuario.values())
 			u.zerarSistema();
-		//System.out.println("Sistema zerado com sucesso.");
 	}
 
 	public void encerrarSistema() {
-		// System.exit(0)?;
+		System.exit(0);
 	}
 
 	/**
@@ -234,7 +233,7 @@ public class SistemaCaronas {
 			throw new Exception("Ponto Inválido");
 		
 		Usuario solicitante = null;
-		for(Sessao s : mapIdSessao.values()) {
+		for(Sessao s : mapIdSessao.values()) { // procura solicitante
 			if(s.getIdSessao().equals(idSessao)) {
 				solicitante = mapIdUsuario.get(s.getIdUser());
 				break;
@@ -244,7 +243,7 @@ public class SistemaCaronas {
 			throw new Exception("IdSessao Inválido");
 		
 		Usuario donoDaCarona = null;
-		for(Usuario u : mapIdUsuario.values()) {
+		for(Usuario u : mapIdUsuario.values()) { // procura donoDaCarona
 			if(u.getMapIdCaronasOferecidas().containsKey(idCarona)) {
 				donoDaCarona = u;
 				break;
@@ -280,9 +279,10 @@ public class SistemaCaronas {
 		if(pontos == null || pontos.equals(""))
 			throw new Exception("Ponto Inválido");
 			
-		for(Sessao s : mapIdSessao.values()) {
+		for(Sessao s : mapIdSessao.values()) { // procura donoDaCarona
 			if(s.getIdSessao().equals(idSessao)) {
-				mapIdUsuario.get(s.getIdUser()).responderSugestaoPontoEncontro(idCarona, idSugestao, pontos);
+				Usuario donoDaCarona = mapIdUsuario.get(s.getIdUser()); 
+				donoDaCarona.responderSugestaoPontoEncontro(idCarona, idSugestao, pontos);
 			}
 		}
 	}
@@ -320,6 +320,7 @@ public class SistemaCaronas {
 		if(donoDaCarona == null)
 			throw new Exception("IdCarona inválido");
 		
+		//TODO erro: DONODACARONA x SOLICITANTE
 		return donoDaCarona.solicitarVagaPontoEncontro(idCarona, donoDaCarona.getIdUsuario(), solicitante.getIdUsuario(),
 				pontos);
 	}

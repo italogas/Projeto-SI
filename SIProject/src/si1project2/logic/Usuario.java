@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import si1project2.util.SpecialLinkedList;
+
 public class Usuario {
 	private String idUsuario;
 	private String login;
@@ -125,7 +127,7 @@ public class Usuario {
 	}
 
 	public List<String> localizarCarona(String origem, String destino) {
-		List<String> caronas = new LinkedList<String>();
+		List<String> caronas = new SpecialLinkedList<String>();
 		
 		if(origem.equals("") && !destino.equals("")) {
 			for(Carona c : mapIdCaronasOferecidas.values()) {
