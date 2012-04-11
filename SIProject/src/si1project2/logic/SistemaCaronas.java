@@ -137,6 +137,7 @@ public class SistemaCaronas {
 		Usuario user = mapIdUsuario.get(mapIdSessao.get(idSessao).getIdUser());
 		return user.localizarCarona(origem, destino);
 	}
+	
 	public Object getAtributoCarona(String idCarona, String nomeAtributo)
 			throws Exception {
 		if(idCarona == null || idCarona.equals(""))
@@ -457,5 +458,24 @@ public class SistemaCaronas {
 		
 		Usuario donoDaCarona = mapIdUsuario.get(mapIdSessao.get(idSessao).getIdUser()); // O(2*logn)
 		donoDaCarona.removerSolicitacao(idCarona, idSolicitacao);
+	}
+	
+	public Perfil visualizarPerfil(String idSessao, String login) throws Exception {
+		for(Usuario u : mapIdUsuario.values())
+			if(u.getLogin().equals(login)) 
+				return (Perfil)u.getAtributo("perfil");
+
+		//caso nao tenha nenhum usuario compativel com o login dado
+		throw new Exception("Login inválido");
+
+	}
+	
+	public String getAtributoPerfil(String login, String atributo) throws Exception {
+		for(Usuario u : mapIdUsuario.values())
+			if(u.getLogin().equals(login)) 
+				return ((Perfil)u.getAtributo("perfil")).getAtributo(atributo).toString();
+
+		//caso nao tenha nenhum usuario compativel com o login dado
+		throw new Exception("Login inválido");
 	}
 }

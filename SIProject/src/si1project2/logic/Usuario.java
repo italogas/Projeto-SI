@@ -14,6 +14,7 @@ public class Usuario {
 	private String senha;
 	private String nome;
 	private String endereco;
+	private Perfil perfil;
 
 	private Map<String, Carona> mapIdCaronasOferecidas = new TreeMap<String, Carona>();
 	private List<String> listaIdsCaronasPegas = new LinkedList<String>();
@@ -24,6 +25,7 @@ public class Usuario {
 		setNome(nome);
 		setEndereco(endereco);
 		setEmail(email);
+		setPerfil(new Perfil(nome, endereco, email));
 		setIdUsuario(this.hashCode() + "");
 	}
 	
@@ -94,7 +96,7 @@ public class Usuario {
 		this.endereco = endereco;
 	}
 
-	public String getAtributo(String nomeAtributo) throws Exception {
+	public Object getAtributo(String nomeAtributo) throws Exception {
 		if(nomeAtributo == null || nomeAtributo.equals(""))
 			throw new Exception("Atributo inválido");
 		
@@ -108,6 +110,8 @@ public class Usuario {
 			return this.getSenha();
 		else if(nomeAtributo.equals("endereco"))
 			return this.getEndereco();
+		else if(nomeAtributo.equals("perfil"))
+			return this.getPerfil();
 		else
 			throw new Exception("Atributo inexistente");
 	}
@@ -116,9 +120,8 @@ public class Usuario {
 			String hora, String vagas) throws Exception {
 		
 		Carona carona = new Carona(idUsuario, origem, destino, data, hora, vagas);
-		//System.out.println("Carona cadastrada id: " + carona.getIdCarona() + " origem: " + origem + " destino: " + destino);
 		mapIdCaronasOferecidas.put(carona.getIdCarona(), carona);
-		
+		getPerfil().setHistoricoDeCaronas(getPerfil().getHistoricoDeCaronas() + carona.toString2());
 		return carona.getIdCarona();
 	}
 
@@ -341,5 +344,13 @@ public class Usuario {
 	public void removerSolicitacao(String idCarona, String idSolicitacao) {
 		Carona c = mapIdCaronasOferecidas.get(idCarona); // O(logn)
 		c.removeSolicitacao(idSolicitacao);
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 }
