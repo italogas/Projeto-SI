@@ -20,6 +20,12 @@ public class Usuario {
 	private List<String> listaIdsCaronasPegas = new LinkedList<String>();
 
 	public Usuario(String login, String senha, String nome, String endereco, String email) throws Exception{
+		if (login == null || login.equals("")) throw new Exception("Login inválido");
+		else if (senha == null || senha.equals("")) throw new Exception("Senha inválida");
+		else if (nome == null || nome.equals("")) throw new Exception("Nome inválido");
+		else if (endereco == null || endereco.equals("")) throw new Exception("Endereço inválido");
+		else if (email == null || email.equals("")) throw new Exception("Email inválido");
+		
 		setLogin(login);
 		setSenha(senha);
 		setNome(nome);
@@ -29,11 +35,27 @@ public class Usuario {
 		setIdUsuario(this.hashCode() + "");
 	}
 	
-	public Usuario(String login2, String senha2, String nome2, String endereco2) throws Exception {
-		setLogin(login2);
-		setSenha(senha2);
-		setNome(nome2);
-		setEndereco(endereco2);
+	public Usuario(String login, String nome, String endereco, String email) throws Exception {
+		if (login == null || login.equals("")) throw new Exception("Login inválido");
+		else if (nome == null || nome.equals("")) throw new Exception("Nome inválido");
+		else if (endereco == null || endereco.equals("")) throw new Exception("Endereço inválido");
+		else if (email == null || email.equals("")) throw new Exception("Email inválido");
+		
+		setLogin(login);
+		setNome(nome);
+		setEndereco(endereco);
+		setEmail(email);
+		setIdUsuario(this.hashCode() + "");
+	}
+	
+	public Usuario(String login, String nome, String endereco) throws Exception {
+		if (login == null || login.equals("")) throw new Exception("Login inválido");
+		else if (nome == null || nome.equals("")) throw new Exception("Nome inválido");
+		else if (endereco == null || endereco.equals("")) throw new Exception("Endereço inválido");
+		
+		setLogin(login);
+		setNome(nome);
+		setEndereco(endereco);
 		setIdUsuario(this.hashCode() + "");
 	}
 
