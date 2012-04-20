@@ -1,0 +1,41 @@
+-------------------------------------------------------------------------------
+Test set: ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.037 sec <<< FAILURE!
+ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSolicitacao()  Time elapsed: 0.005 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSolicitacao(SolicitacaoTest.java:21)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	... 19 more
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testGetOrigem()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testGetOrigem(SolicitacaoTest.java:31)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSetOrigem()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSetOrigem(SolicitacaoTest.java:36)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testGetDestino()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testGetDestino(SolicitacaoTest.java:41)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSetDestino()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSetDestino(SolicitacaoTest.java:46)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testGetPontoEncontro()  Time elapsed: 0.003 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testGetPontoEncontro(SolicitacaoTest.java:51)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSetPontoEncontro()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.SolicitacaoTest.testSetPontoEncontro(SolicitacaoTest.java:56)
+

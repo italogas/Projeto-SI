@@ -1,0 +1,37 @@
+-------------------------------------------------------------------------------
+Test set: ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.042 sec <<< FAILURE!
+ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testGetAtributo()  Time elapsed: 0.009 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testGetAtributo(UsuarioTest.java:105)
+Caused by: java.lang.ClassNotFoundException: org.junit.Assert
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	... 19 more
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioLogin()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioLogin(UsuarioTest.java:23)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioSenha()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioSenha(UsuarioTest.java:39)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioNome()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioNome(UsuarioTest.java:55)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioEndereco()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioEndereco(UsuarioTest.java:71)
+
+ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioEmail()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NoClassDefFoundError: org/junit/Assert
+	at ccc.ufcg.edu.br.ProjetoSI.unitTest.UsuarioTest.testUsuarioEmail(UsuarioTest.java:87)
+
