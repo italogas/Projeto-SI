@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.006" errors="0" skipped="0" tests="0" name="ccc.ufcg.edu.br.ProjetoSI.SistemaCaronasTest">
+<testsuite failures="0" time="0.003" errors="0" skipped="0" tests="0" name="ccc.ufcg.edu.br.ProjetoSI.SistemaCaronasTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jre7\bin"/>
@@ -14,13 +14,13 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\Italo\git\SIProject\ProjetoSI"/>
+    <property name="user.dir" value="C:\Users\Italo\git\Projeto-SI\ProjetoSI"/>
     <property name="java.runtime.version" value="1.7.0_03-b05"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="basedir" value="C:\Users\Italo\git\SIProject\ProjetoSI"/>
+    <property name="basedir" value="C:\Users\Italo\git\Projeto-SI\ProjetoSI"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jre7\lib\endorsed"/>
     <property name="os.arch" value="x86"/>
-    <property name="surefire.real.class.path" value="C:\Users\Italo\git\SIProject\ProjetoSI\target\surefire\surefirebooter806543965610025541.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\surefire\surefirebooter4937822838302329665.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\Italo\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -29,7 +29,7 @@
     <property name="os.name" value="Windows 7"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jre7\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre7/bin/client;C:/Program Files/Java/jre7/bin;C:/Program Files/Java/jre7/lib/i386;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\Italo\Downloads\eclipse;;."/>
-    <property name="surefire.test.class.path" value="C:\Users\Italo\git\SIProject\ProjetoSI\target\test-classes;C:\Users\Italo\git\SIProject\ProjetoSI\target\classes;C:\Users\Italo\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\test-classes;C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\classes;C:\Users\Italo\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="51.0"/>
     <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
@@ -40,11 +40,11 @@
     <property name="java.specification.version" value="1.7"/>
     <property name="file.encoding" value="Cp1252"/>
     <property name="user.name" value="Italo"/>
-    <property name="java.class.path" value="C:\Users\Italo\git\SIProject\ProjetoSI\target\test-classes;C:\Users\Italo\git\SIProject\ProjetoSI\target\classes;C:\Users\Italo\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
+    <property name="java.class.path" value="C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\test-classes;C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\classes;C:\Users\Italo\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;"/>
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jre7"/>
-    <property name="sun.java.command" value="C:\Users\Italo\git\SIProject\ProjetoSI\target\surefire\surefirebooter806543965610025541.jar C:\Users\Italo\git\SIProject\ProjetoSI\target\surefire\surefire3976511311211605626tmp C:\Users\Italo\git\SIProject\ProjetoSI\target\surefire\surefire6893889397785178064tmp"/>
+    <property name="sun.java.command" value="C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\surefire\surefirebooter4937822838302329665.jar C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\surefire\surefire6451824627562834973tmp C:\Users\Italo\git\Projeto-SI\ProjetoSI\target\surefire\surefire8231024135504811299tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="pt"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>

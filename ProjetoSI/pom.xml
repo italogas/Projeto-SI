@@ -18,10 +18,28 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.8.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+	  <groupId>ufcg.edu.br</groupId>
+	  <artifactId>easyaccept</artifactId>
+	  <version>1.0.0</version>
+	</dependency>
   </dependencies>
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
   <description>Projeto da Disciplina de SI1 para criação de um sistema que consiste em uma rede social na web para compartilhamento de caronas.
 
 GUILHERME MONTEIRO GADELHA &lt;guilhermemgadelha@gmail.com&gt;

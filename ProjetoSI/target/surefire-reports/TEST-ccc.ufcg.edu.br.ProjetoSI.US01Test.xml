@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.11" errors="0" skipped="0" tests="4" name="ccc.ufcg.edu.br.ProjetoSI.unitTest.CaronaTest">
+<testsuite failures="0" time="0.028" errors="1" skipped="0" tests="1" name="ccc.ufcg.edu.br.ProjetoSI.US01Test">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jre7\bin"/>
@@ -61,8 +61,46 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase time="0.012" classname="ccc.ufcg.edu.br.ProjetoSI.unitTest.CaronaTest" name="testGetTrajeto"/>
-  <testcase time="0" classname="ccc.ufcg.edu.br.ProjetoSI.unitTest.CaronaTest" name="testGetAtributo"/>
-  <testcase time="0.001" classname="ccc.ufcg.edu.br.ProjetoSI.unitTest.CaronaTest" name="testGetCarona"/>
-  <testcase time="0.001" classname="ccc.ufcg.edu.br.ProjetoSI.unitTest.CaronaTest" name="testCarona"/>
+  <testcase time="0.009" classname="ccc.ufcg.edu.br.ProjetoSI.US01Test" name="testarEasyAcceptScript">
+    <error message="easyaccept/EasyAcceptFacade" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: easyaccept/EasyAcceptFacade
+	at ccc.ufcg.edu.br.ProjetoSI.US01Test.testarEasyAcceptScript(US01Test.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at junit.framework.TestCase.runTest(TestCase.java:168)
+	at junit.framework.TestCase.runBare(TestCase.java:134)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:35)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:146)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.ProviderFactory$ClassLoaderProxy.invoke(ProviderFactory.java:103)
+	at $Proxy0.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:145)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcess(SurefireStarter.java:87)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:69)
+Caused by: java.lang.ClassNotFoundException: easyaccept.EasyAcceptFacade
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	... 26 more
+</error>
+    <system-out>@SLTests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+@SLRunning ccc.ufcg.edu.br.ProjetoSI.US01Test
+</system-out>
+  </testcase>
 </testsuite>
